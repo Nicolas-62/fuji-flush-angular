@@ -1,0 +1,6 @@
+<p>List of games : </p>
+<ul>
+    <li *ngFor="let game of games">
+       id : {{game.id}} - author : {{ game.author.nickName}} - nbPlayerMissing : {{game.nbPlayerMissing}} - isFinished : {{game.isFinished}}
+    </li>
+</ul>
