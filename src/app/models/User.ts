@@ -2,5 +2,5 @@ export class User {
     nickName?: String;
     score?: number;
     ranka?: number;
-    constructor(public email: String){}
+    constructor(public email: string){}
 }

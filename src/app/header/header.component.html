@@ -1,1 +1,22 @@
-<p>header works!</p>
+<header>
+    <div class="bandeau">
+        <h1>FUJI FLUSH SPACE</h1>
+    </div>
+    <ul class="logout">
+            <!-- #{if controllers.Security.isConnected()}
+                <li> User : ${controllers.Security.connectedUser().nickName} </li>
+                <li> <a href="@{Secure.logout()}">Logout</a> </li>
+
+            #{/if} -->
+    </ul>
+</header>
+
+<div class="animate">
+    <img src="../../assets/images/xwings.png">
+</div>
+<nav class="navigation">
+    <a href="@{Application.ranking()}" class="navigation-item"> Ranking </a>
+    <a href="@{Application.gameRoom()}" class="navigation-item"> Game Room </a>
+    <a href="/records" class="navigation-item"> Records </a>
+    <a href="/ruleOfGame" class="navigation-item"> Rule of the game </a>
+</nav>

@@ -10,8 +10,8 @@ import { User } from '../models/User';
 })
 export class GameService {
 
-  games = [];
-  gamesSubject = new Subject<Game[]>();
+  games: Game[] = [];
+  gamesSubject = new Subject<any[]>();
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -72,7 +72,5 @@ export class GameService {
         this.emitGames();     
       });
   }
-  getGameSlug(slug:String):Observable<Game>{
-    return this.http.get<Game>(this.API_URL+"/Games/"+slug);
-  }
+
 }
