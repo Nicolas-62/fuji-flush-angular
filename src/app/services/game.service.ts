@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, of } from 'rxjs';
 import { Game } from '../models/Game';
 import { catchError, map, tap } from 'rxjs/operators';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  games: Game[];
+  games = [];
   gamesSubject = new Subject<Game[]>();
 
   private httpOptions = {
@@ -17,7 +18,7 @@ export class GameService {
   };
   
   constructor(private http:HttpClient) { 
-    this.getGames();
+    // this.getGames();
   }
   API_URL = "http://localhost:9000/api";
   /**
@@ -30,7 +31,7 @@ export class GameService {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
-      console.error("error : "+error); // log to console instead
+      console.error("error : "+error.message); // log to console instead
 
       // TODO: better job of transforming error for user consumption
       // this.log(`${operation} failed: ${error.message}`);
@@ -46,27 +47,29 @@ export class GameService {
   //   this.messageService.add(message);
   // }
   getGames(){
+    console.log("lancement requete");
     this.http.get<Game[]>(this.API_URL+"/games")      
     .pipe(
       catchError(this.handleError<Game[]>('getGames', []))
     ).subscribe(
       games =>{
-        this.games = games ? games : []
+        this.games = games ? games : [];
         console.log("games received : "+ this.games);
-        this.emitGames();
-      
-      });
+        this.emitGames();     
+      }
+    );
   }
-  addGame(game : Game){
-    this.http.post<Game>(this.API_URL+"/game/add", game, this.httpOptions)      
+  addGame(nbPlayer: number){
+    const game = new Game(nbPlayer);
+    game.author = new User("bob@g.com");
+    this.http.post<any>(this.API_URL+"/game/add", JSON.stringify(game))      
     .pipe(
       catchError(this.handleError<Game>('getGame', null))
     ).subscribe(
       game =>{
         this.games.push(game);
         console.log("game received : "+ game);
-        this.emitGames();
-      
+        this.emitGames();     
       });
   }
   getGameSlug(slug:String):Observable<Game>{

@@ -4,3 +4,139 @@
        id : {{game.id}} - author : {{ game.author.nickName}} - nbPlayerMissing : {{game.nbPlayerMissing}} - isFinished : {{game.isFinished}}
     </li>
 </ul>
+<div class="newGame">
+
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class ="radio">
+            <input type="radio"
+                   name="nbPlayer" value="3" checked ngModel>
+            <label>3</label>
+    
+            <input type="radio"
+                   name="nbPlayer" value="4" checked ngModel>
+            <label>4</label>
+    
+            <input type="radio"
+                   name="nbPlayer" value="5" checked ngModel>
+            <label>5</label>
+    
+            <input type="radio"
+                   name="nbPlayer" value="6" checked ngModel>
+            <label>6</label>
+    
+            <input type="radio"
+                   name="nbPlayer" value="7" checked ngModel>
+            <label>7</label>
+    
+            <input type="radio"
+                   name="nbPlayer" value="8" checked ngModel>
+            <label>8 Players</label>
+        </div>
+        <input type="submit" class="submitbtn" value="New Timeless Game">
+    </form>
+</div>
+<!-- 
+<div class="gameRoom">
+    <div class="newGame">
+
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class ="radio">
+                <input type="radio"
+                       name="nbPlayer" value="3" checked ngModel>
+                <label>3</label>
+        
+                <input type="radio"
+                       name="nbPlayer" value="4" checked ngModel>
+                <label>4</label>
+        
+                <input type="radio"
+                       name="nbPlayer" value="5" checked ngModel>
+                <label>5</label>
+        
+                <input type="radio"
+                       name="nbPlayer" value="6" checked ngModel>
+                <label>6</label>
+        
+                <input type="radio"
+                       name="nbPlayer" value="7" checked ngModel>
+                <label>7</label>
+        
+                <input type="radio"
+                       name="nbPlayer" value="8" checked ngModel>
+                <label>8 Players</label>
+            </div>
+            <input type="submit" class="submitbtn" value="New Timeless Game">
+        </form>
+    </div>
+
+    <div class="games">
+        <div class="availablegames">
+            <h3>Available games</h3>
+            <table class="tableau">
+                <thead class="header-table">
+                <td class="table-id"> ID </td>
+                <td class="table-numberOfPlayers"> Number </td>
+                <td class="table-join"> State </td>
+                </thead>
+                <tbody class="body-table">
+                    <div *ngFor="let aGameToJoin of gameTojoin">
+                        <tr class="ligne-tableau">
+                            <td class="table-id"> {{ aGameToJoin.id }}</td>
+                            <td class="table-numberOfPlayers"> {{ aGameToJoin.hands.length }}/{{ aGameToJoin.hands.length + aGameToJoin.nbPlayerMissing }}</td>
+                            <td class="table-join"> <a class="registerbtn" (click)="join()"> Join </a> </td>
+                        </tr>                     
+                    </div>
+                    </div>
+                </tbody>
+            </table>
+        </div>
+        <div class="mygames">
+            <h3>My games</h3>
+            <table class="tableau">
+                <thead class="header-table">
+                <td class="table-id"> ID </td>
+                <td class="table-numberOfPlayers"> Number </td>
+                <td class="table-join"> State </td>
+                </thead>
+                <tbody class="body-table">
+                    <div *ngFor="let aGameToPlay of gameToPlay">
+                        <tr class="ligne-tableau">
+                            <td class="table-id"> {{ aGameToPlay.id }}</td>
+                            <td class="table-numberOfPlayers"> {{ aGameToJoin.hands.length }}/{{ aGameToJoin.hands.length + aGameToJoin.nbPlayerMissing }}</td>
+                            <div *ngIf="aGameToPlay.nbPlayerMissing == 0">
+                                <div *ngIf=""
+                            </div>
+                            <td class="table-join"> <a class="registerbtn" (click)="join()"> Join </a> </td>
+                        </tr>                     
+                    </div>
+                    </div>
+                </tbody>
+                <tbody class="body-table">
+                #{if games}
+                    #{list items:games, as:'aGame'}
+                        #{list items:aGame.hands, as:'aHand'}
+                            #{if aHand.player.equals(player) && aGame.isFinished.equals(false)}                                                                   *{ Si le joueur est dans cette partie }*
+                            <tr class="ligne-tableau">
+                                <td class="table-id"> ${aGame.id} </td>
+                                <td class="table-numberOfPlayers"> ${aGame.hands.size()}/${aGame.hands.size()+aGame.nbPlayerMissing} </td>
+                                #{if aGame.nbPlayerMissing == 0}                                                            *{ Si la partie est pleine = Abandon ou PLAY}*
+                                    #{if aHand.hasLeft}
+                                        <td class="table-join"> You have quit the Game </td>
+                                    #{/if}
+                                    #{else}
+                                        <td class="table-join"> <a class="registerbtn" href="@{Application.play(aGame.uuid)}"> play </a> </td>
+                                    #{/else}
+                                #{/if}
+                                #{else}                                                                                     *{ Sinon en attente de joueur avant lancement }*
+                                    <td class="table-join"> Waiting </td>
+                                #{/else}
+                            </tr>
+                            #{/if}
+                        #{/list}
+                    #{/list}
+                #{/if}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> -->

@@ -1,6 +1,6 @@
 export class User {
-    email: String;
-    nickName: String;
-    score: number;
-    ranka: number;
+    nickName?: String;
+    score?: number;
+    ranka?: number;
+    constructor(public email: String){}
 }
