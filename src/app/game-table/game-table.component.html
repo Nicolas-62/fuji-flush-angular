@@ -1,0 +1,38 @@
+<div id="containerGame">
+    <div id="currentGame" *ngIf="!game.isFinished">
+        <h3>Current Game </h3>
+        <table class="table-game">
+            <thead>
+                <td> NICKNAME </td>
+                <td> CARDS </td>
+                <td> BOARD </td>
+            </thead>
+            <tbody>
+                <div *ngFor="let aHand of game.hands; let i = index">
+                    <div *ngIf="aHand.player.email === player.email; else otherHand">
+                        <app-player-hand [game]="game" [hand]="aHand"></app-player-hand>
+                    </div>
+                    <ng-template #otherHand><app-other-hand [game]="game" [hand]="aHand" [index]="i"></app-other-hand></ng-template>
+                </div>
+            </tbody>
+        </table>
+    </div> 
+    <app-game-history [game]="game"></app-game-history>
+
+</div>
+<!-- #{/if}
+
+#{else}
+
+#{if handPlayer.hasWon}
+<img src="/public/images/victory.png" class="resultImage">
+#{/if}
+#{else}
+#{if handPlayer.hasLeaveWon}
+<img src="/public/images/victory.png" class="resultImage">
+#{/if}
+#{else}
+<img src="/public/images/defeat.png" class="resultImage">
+#{/else}
+#{/else}
+#{/else} -->

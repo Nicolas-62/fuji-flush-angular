@@ -1,5 +1,5 @@
-<div class="gameRoom">
-    <div class="newGame">
+<div class="panel-gameRoom">
+    <div class="panel-newGame">
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class ="radio">
                 <input type="radio"
@@ -29,7 +29,7 @@
             <input type="submit" class="submitbtn" value="New Timeless Game">
         </form>
     </div>
-    <div class="games">
+    <div class="panel-games">
         <div class="availablegames">
             <h3>Available games</h3>
             <table class="tableau">
@@ -39,13 +39,11 @@
                 <td class="table-join"> State </td>
                 </thead>
                 <tbody class="body-table">
-                    <div *ngFor="let aGameToJoin of gamesToJoin">
-                        <tr class="ligne-tableau">
-                            <td class="table-id"> {{ aGameToJoin.id }}</td>
-                            <td class="table-numberOfPlayers"> {{ aGameToJoin.hands.length }}/{{ aGameToJoin.hands.length + aGameToJoin.nbPlayerMissing }}</td>
-                            <td class="table-join"> <a class="registerbtn" (click)="join()"> Join </a> </td>
-                        </tr>                     
-                    </div>
+                    <tr class="ligne-tableau" *ngFor="let aGameToJoin of gamesToJoin">
+                        <td class="table-id"> {{ aGameToJoin.id }}</td>
+                        <td class="table-numberOfPlayers"> {{ aGameToJoin.hands.length }}/{{ aGameToJoin.hands.length + aGameToJoin.nbPlayerMissing }}</td>
+                        <td class="table-join"> <a class="registerbtn" (click)="join(aGameToJoin)"> Join </a> </td>
+                    </tr>                     
                 </tbody>
             </table>
         </div>
@@ -58,23 +56,21 @@
                 <td class="table-join"> State </td>
                 </thead>
                 <tbody class="body-table">
-                    <div *ngFor="let aGameToPlay of gamesToPlay">
-                        <tr class="ligne-tableau">
-                            <td class="table-id"> {{ aGameToPlay.id }}</td>
-                            <td class="table-numberOfPlayers"> {{ aGameToPlay.hands.length }}/{{ aGameToPlay.hands.length + aGameToPlay.nbPlayerMissing }}</td>
-                            <div *ngIf="aGameToPlay.nbPlayerMissing == 0; else waiting">
-                                <div *ngIf="getHandOfPlayer(aGameToPlay)">
-                                    <td class="table-join">
-                                            <div *ngIf="hand.hasLeft; else play">
-                                                 You have quit the Game 
-                                            </div>
-                                            <ng-template #play><a class="registerbtn" (click)="play()"> play </a></ng-template>
-                                    </td>
-                                </div>
+                    <tr class="ligne-tableau" *ngFor="let aGameToPlay of gamesToPlay">
+                        <td class="table-id"> {{ aGameToPlay.id }}</td>
+                        <td class="table-numberOfPlayers"> {{ aGameToPlay.hands.length }}/{{ aGameToPlay.hands.length + aGameToPlay.nbPlayerMissing }}</td>
+                        <div *ngIf="aGameToPlay.nbPlayerMissing == 0; else waiting">
+                            <div *ngIf="getHandOfPlayer(aGameToPlay)">
+                                <td class="table-join">
+                                        <div *ngIf="aHand.hasLeft; else play">
+                                                You have quit the Game 
+                                        </div>
+                                        <ng-template #play><a class="registerbtn" routerLink="/game/{{ aGameToPlay.uuid }}"> play </a></ng-template>
+                                </td>
                             </div>
-                            <ng-template #waiting><td class="table-join"> Waiting </td></ng-template>
-                        </tr>                     
-                    </div>
+                        </div>
+                        <ng-template #waiting><td class="table-join"> Waiting </td></ng-template>
+                    </tr>                     
                 </tbody>
 
             </table>

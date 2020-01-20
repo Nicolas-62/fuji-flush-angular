@@ -1,1 +1,778 @@
-/* You can add global styles to this file, and also import other style files */
+/* HTML ***************************************************************************************************************/
+html
+{
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+
+/* BODY - THE BACK OF THE WEBSITE *************************************************************************************/
+body
+{
+    z-index: 1;
+
+    background-image: url("./assets/images/wallpaper2.png");
+    background-repeat: no-repeat;
+
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+
+    height:100%;
+    width: 100%;
+}
+
+
+/* HEADER - TITLE NICKNAME AND LOGOUT *********************************************************************************/
+header
+{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 10%;
+    width: 100%;
+    margin-bottom: 20px;
+
+    background-color: rgba(0,0,0, .2);
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Titre FUJI FLUSH */
+
+.bandeau
+{
+    width: 99%;
+}
+
+.header-title
+{
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    text-align: center;
+}
+
+.header-infos
+{
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    text-align: right;
+    width: 90%;
+}
+
+header a, a:visited
+{
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+header a:hover
+{
+    text-shadow: 1px 1px 2px black, 0 0 1em midnightblue, 0 0 0.2em cyan;
+}
+
+
+
+
+/* WHITE TITLE ********************************************************************************************************/
+h3
+{
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    font-size: 25px;
+}
+
+
+/* RANKING PAGE *******************************************************************************************************/
+.titre
+{
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    font-size: 20px;
+}
+
+.panel-rank, .register
+{
+    position: relative;
+    width: 90%;
+    z-index: 4;
+    margin: auto;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,.5) 0%, rgba(0,200, 255, .4) 40%, rgba(255,255,255,.35) 50%, rgba(0,200, 255,.4) 60%, rgba(0,0,0,.5) 100%);
+
+    border: ridge 2px rgba(0, 200, 255, 0.7);
+}
+
+.totalPlayers
+{
+    text-align: center;
+    font-size: 2em;
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+}
+
+
+li
+{
+    text-decoration: none;
+    list-style-type: none;
+}
+
+
+/* GAMEROOM PAGE ******************************************************************************************************/
+/* Panel composé du :
+    panel New game pour créer une partie
+    panel Available games pour afficher les parties disponibles
+    panel Mygames pour afficher les parties où je suis présent
+*/
+
+.panel-newGame
+{
+
+}
+
+.radio
+{
+    display: inline-block;
+    margin-bottom: 50px;
+    color: white;
+}
+
+.submitbtn
+{
+    width: 200px;
+    height: 50px;
+    margin-left: 20px;;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.50);
+    border: ridge 2px rgba(0, 200, 255, 0.9);
+    border-radius: 10px;
+    text-shadow: 1px 1px 2px black, 0 0 1em #00FF00, 0 0 0.2em cyan;
+    color: cyan;
+}
+
+.submitbtn:hover
+{
+    background-color: rgba(0, 0, 0, 1);
+    text-shadow: 1px 1px 2px black, 0 0 1em #00FF00, 0 0 0.2em cyan;
+    font-weight: bold;
+}
+
+.submitbtn:visited
+{
+    color: #00FF00;
+}
+
+
+/* Panel GAMES composé des :
+    panel availablegames
+    panel mygames
+*/
+.panel-gameRoom
+{
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 99%;
+}
+
+.panel-games
+{
+    margin: 0;
+    padding: 0;
+    z-index: 3;
+    width: 99%;
+    height: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.mygames, .availablegames
+{
+    background: rgba(0,0,15,.7);
+    border: ridge 2px rgba(0, 200, 255, 0.7);
+    padding: 0;
+    margin: 0;
+    width: 50%;
+    height: 400px;
+    text-align: center;
+    overflow: auto;
+}
+
+.mygames li, .availablegames li
+{
+    margin: 10px;
+}
+
+.mygames a, .availablegames a
+{
+    margin-left: 30px;
+    text-decoration: none;
+    padding: 3px;
+}
+
+
+/* PLAY A GAME ********************************************************************************************************/
+/* CONTAINER **************************************************/
+#containerGame
+{
+    position: relative;
+    z-index: 3;
+
+    height: 100%;
+    width: 99%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#currentGame
+{
+    position: relative;
+    width: 74%;
+    height: 100%;
+
+    text-align: center;
+    background-color: rgba(0, 0, 50, 0.3);
+    border: ridge 1px rgba(0, 200, 255, 1);
+    color: white;
+    margin: top;
+    padding: 0;
+}
+
+#gameHistory
+{
+    position: relative;
+    width: 25%;
+    height: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    text-align: center;
+}
+
+#table-area
+{
+    border: ridge 1px rgba(0, 200, 255, 1);
+    position: relative;
+    width: 100%;
+    height: 345px;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.button-area
+{
+    padding: 10;
+    position: relative;
+    width: 100%;
+    height: 55px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+/* TABLEAU ****************************************************/
+.table-game
+{
+    width: 100%;
+    height: 85%;
+}
+.column-nickname
+{
+    table-layout: auto;
+    width: 20%;
+}
+.column-cards
+{
+    table-layout: auto;
+    width: 70%;
+}
+.column-board
+{
+    table-layout: auto;
+    width: 10%;
+}
+
+/* LIGNE JOUEUR COURANT ***************************************/
+.currentPlayer
+{
+    background-color: rgba(0, 200, 255, 0.7);
+    height: 60px;
+}
+
+/* LIGNE JOUEUR ATTENTE ***************************************/
+.otherPlayer
+{
+    height: 60px;
+}
+
+
+.playerCards
+{
+    display: inline-block;
+    align-items: center;
+    height: 80px;
+}
+
+/* BOUTON POUR QUITTER LA PARTIE ***************************************/
+
+.leavebtn
+{
+    cursor: pointer;
+    width: 50%;
+    height: 50px;
+    font-size: 15px;
+    float: right;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.50);
+    border: ridge 2px red;
+    border-radius: 10px;
+    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em cyan;
+    color: red;
+}
+
+.leavebtn a {
+    text-decoration: none;
+    color: red;
+}
+
+.leavebtn:hover
+{
+    background-color: rgba(0, 0, 0, 1);
+    font-weight: bold;
+}
+
+/* BOUTON POUR RETOURNER SUR LA GAMEROOM ***************************************/
+
+.backbtn
+{
+    cursor: pointer;
+    width: 50%;
+    height: 50px;
+    font-size: 15px;
+    float: right;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.50);
+    border: ridge 2px cyan;
+    border-radius: 10px;
+    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em cyan;
+    color: cyan;
+}
+
+.backbtn a {
+    text-decoration: none;
+    color: cyan;
+}
+
+.backbtn:hover
+{
+    background-color: rgba(0, 0, 0, 1);
+    font-weight: bold;
+}
+
+
+/* CARDS **************************************************************************************************************/
+.cards img
+{
+    border: ridge 2px rgba(0, 255, 0, 0);
+}
+
+.cards img:hover
+{
+    border: ridge 2px rgba(0, 255, 255, 1);
+}
+
+
+/* REGISTER ***********************************************************************************************************/
+.formulaire
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.form-saisie
+{
+    width: 400px;
+    margin: auto;
+
+    text-align: center;
+}
+
+
+#remember
+{
+    width: 400px;
+    margin: auto;
+
+    text-align: center;
+}
+
+/* NAVIGATION **********************************************************************************************************/
+.navigation {
+    width: 99%;
+    height: 10%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 90%;
+    margin: auto;
+
+    padding: 0;
+}
+
+
+.navigation-item
+{
+    width: 300px;
+    height: 50px;
+
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em #00DDFF, 0 0 0.2em cyan;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 27px;
+
+    background: linear-gradient(0deg, rgba(0,0,0,0.1) 0%, rgba(0,200,255,1) 61%, rgba(0,0,0,0.4) 100%);
+
+    border-radius: 10%;
+}
+
+
+.navigation-item:hover
+{
+    background: linear-gradient(0deg, rgba(0,200,255,0.3) 0%, rgba(0,200,255,1) 61%, rgba(0,200,255,0.7) 100%);
+}
+
+
+/* TABLEAU *************************************************************************************************************/
+.tableau
+{
+    width: 99%;
+    color: white;
+}
+
+.header-table
+{
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+
+    height: 20px;
+}
+
+.body-table
+{
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+}
+
+.ligne-tableau
+{
+    height: 30px;
+    font-size: 25px;
+}
+
+.ligne-tableau:hover
+{
+    background-color: rgba(0, 230, 255, 0.3);
+}
+
+
+/* GAME ROOM PAGE */
+.table-id, .table-numberOfPlayers, .table-join
+{
+    width: 33%;
+    font-size: 15px;
+}
+
+/* RANKING PAGE */
+.list-rank
+{
+
+}
+
+.pseudo, .score
+{
+    width: 50%;
+}
+
+.connected
+{
+    height: 35px;
+    background-color: #00CCFF;
+    color: black;
+}
+
+.player
+{
+    height: 30px;
+    background-color: rgba(0, 0, 75, .7);
+}
+
+.total-joueur
+{
+    text-align: center;
+    color: white;
+}
+
+/* RECORDS PAGE */
+
+.container-records
+{
+    position: relative;
+    z-index: 4;
+
+    width: 98%;
+    margin: auto;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,.5) 0%, rgba(0,200, 255, .4) 40%, rgba(255,255,255,.35) 50%, rgba(0,200, 255,.4) 60%, rgba(0,0,0,.5) 100%);
+    border: ridge 2px rgba(0, 200, 255, 0.7);
+    height: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.panel-records
+{
+    position: relative;
+    z-index: 4;
+    width: 75%;
+    height: 600px;
+    overflow: auto;
+}
+
+.list-records
+{
+    position: relative;
+    width: 100%;
+    color: white;
+}
+
+.panel-history
+{
+    position: relative;
+    z-index: 4;
+    width: 25%;
+    height: 600px;
+    overflow: auto;
+}
+
+.body-table-records
+{
+     text-align: center;
+     color: white;
+     text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+     font-family: 'Orbitron', sans-serif;
+     font-size: 15px;
+}
+
+.winner
+{
+    height: 30px;
+    background-color: rgba(0,153,51,0.2);
+}
+
+.looser
+{
+    height: 30px;
+    background-color: rgba(255,0,0,0.2);
+}
+.leaver
+{
+    height: 30px;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.leavewinner
+{
+    height: 30px;
+    background-color: rgba(255,255,0,0.2);
+}
+
+
+.body-table-history
+{
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+}
+
+.imgrecords
+{
+    height: 25px;
+}
+
+
+
+
+
+.gameid
+{
+    width: 10%;
+}
+
+.nbPlayers
+{
+    width: 20%;
+}
+
+.author
+{
+    width: 30%;
+}
+
+.winners
+{
+    width: 60%;
+}
+
+.gainedscore
+{
+    width: 20%;
+}
+
+
+
+
+
+
+/* RULES OF THE GAME **************************************************************************************************/
+.panel-rules
+{
+    position: relative;
+    z-index: 4;
+
+    color: white;
+    font-size: 20px;
+}
+
+.video
+{
+    float: left;
+    margin: 10;
+}
+
+
+
+
+/* BOUTON **************************************************************************************************************/
+.registerbtn
+{
+    width: 420px;
+    height: 50px;
+
+    margin: auto;
+    margin-bottom: 20px;
+
+    cursor: pointer;
+
+    background-color: rgba(0, 0, 25, 0.9);
+    border: ridge 2px rgba(0, 230, 255, 0.9);
+    color: #00CCFF;
+}
+
+.registerbtn:visited
+{
+    color: #00CCFF;
+}
+
+.registerbtn a
+{
+    cursor: pointer;
+    color: #00CCFF;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.registerbtn a:visited
+{
+    color: #00CCFF;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+
+/* CALL OF ANIMATION **************************************************************************************************/
+.animate
+{
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+
+    animation-duration: 10s;
+    animation-name: xwings-move;
+    animation-iteration-count: infinite;
+}
+
+.animate2
+{
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+
+    animation-duration: 10s;
+    animation-name: tie-move;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+
+/* ANIMATIONS **************************************************************************************************************/
+
+@keyframes xwings-move {
+    from
+    {
+        left: 100%;
+    }
+    to
+    {
+        left: -50%;
+    }
+}
+
+@keyframes tie-move {
+    0%
+    {
+        top: 100%;
+        left: 100%;
+    }
+    15%
+    {
+        top: 100%;
+        left: 100%;
+    }
+    45%
+    {
+        top: 70%;
+        left: 50%;
+    }
+    100%
+    {
+        top: 50%;
+        left: -50%;
+    }
+}

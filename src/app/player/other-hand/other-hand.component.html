@@ -1,0 +1,15 @@
+<tr [ngClass]="{'currentPlayer' : currentPlayer,
+                'otherPlayer' : !currentPlayer } " height="80">
+ <!-- NICKNAME -->
+    <td class="column-nickname">{{ hand.player.nickName }} <span *ngIf="hand.hasLeft">left the game</span></td>
+
+    <!-- CARDS -->
+    <td class="column-cards" *ngFor="let card of hand.cards">
+        <img src="../../assets/images/png/dosv3.png" class="playerCards"/>
+    </td>
+    <!-- BOARD -->
+    <td *ngIf="hand.cardP == null; else cardPvalue">
+        <img src="../../assets/images/png/dos.png" class="playerCards"/>
+    </td>
+    <ng-template #cardPvalue><img src="../../assets/images/png/{{ hand.cardP.value }}.png" class="playerCards"/></ng-template>
+ </tr>

@@ -1,0 +1,15 @@
+<div class="register">
+  <form class="formulaire" (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <h1 class="titre">Login</h1>
+    <p>Choisissez un joueur</p>
+    <label class="form-titre" for="email">
+          Email :
+    </label>
+    <select  class="form-saisie" id="email" name="email" ngModel required>
+      <option *ngFor="let player of players" value="{{ player.email }}" >{{ player.email }}</option>
+    </select>
+    <button class="registerbtn"
+              type="submit" 
+              [disabled]="f.invalid">Se connecter</button>
+  </form>
+</div>
