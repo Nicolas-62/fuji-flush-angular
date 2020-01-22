@@ -13,7 +13,8 @@ export class AuthService {
     new User("bob@g.com", "Bob"),
     new User("dark.maul@coaxys.com", "Maul"),
     new User("lisa@g.com", "Lisa"),
-    new User("alex@g.com", "Alex")
+    new User("alex@g.com", "Alex"),
+    new User("ki-adi-mundi@coaxys.com", "Ki-Adi-Mundi")
   ]
   constructor() { }
 

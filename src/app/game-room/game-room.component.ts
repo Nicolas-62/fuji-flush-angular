@@ -6,6 +6,7 @@ import { Game } from '../models/Game';
 import { User } from '../models/User';
 import { Hand } from '../models/Hand';
 import { AuthService } from '../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game-room',
@@ -18,7 +19,7 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   gamesSubscription: Subscription;
   // toutes les parties reçus
   games: any[];
-  // les parties triées selon qu le joueur les a déjà rejoint ou pas
+  // les parties triées selon que le joueur les a déjà rejoint ou pas
   gamesToJoin: Game[];
   gamesToPlay: Game[];
   // le joueur
@@ -31,15 +32,17 @@ export class GameRoomComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.player = this.authService.player;
-    // connection du service au websocket
-    this.roomService.subscribeToRoomWebSocket(this.player);
-    // connection à l'emétteur du service qui recoit et émet les données du websocket    
+    // connection à l'emétteur du service.   
     this.gamesSubscription = this.roomService.gamesSubject.subscribe(
       (games: any[]) => {
         this.games = games;
-        console.log("games received after subscription : " +this.games.length);  
+        console.log("from gameRoom, received from roomService (nb games): " +this.games.length);  
         this.orderGames();      
     });
+    // récupération des parties par le service
+    this.roomService.getGames();
+    // connection du service au websocket
+    this.roomService.subscribeToRoomWebSocket(this.player);
   }
   // rejoindre une partie
   join(game: Game) {
@@ -62,6 +65,7 @@ export class GameRoomComponent implements OnInit, OnDestroy {
     this.roomService.addGameWS(nbPlayer, this.player);
   }
   ngOnDestroy(){
+    console.log("component destroyed")
     this.gamesSubscription.unsubscribe();
     this.roomService.roomWebSocket.unsubscribe();
   }  
@@ -71,7 +75,7 @@ export class GameRoomComponent implements OnInit, OnDestroy {
     this.gamesToPlay = [];
     this.games.forEach(game => {
       let joined = false;
-      if(!game.isFinished){
+    //if(!game.isFinished){
         // checking if player already joined to the game
         for(let i = 0; i <game.hands.length; i++){
           if(game.hands[i].player.email == this.player.email){
@@ -84,7 +88,7 @@ export class GameRoomComponent implements OnInit, OnDestroy {
         }else{
           this.gamesToJoin.push(game);
         }
-      }
+      // }
     });
   }
 }

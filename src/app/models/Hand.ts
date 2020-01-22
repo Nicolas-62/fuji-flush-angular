@@ -10,4 +10,5 @@ export class Hand{
     cardP?: Card;
     hasLeft: boolean;
     hasWon: boolean;
+    hasLeaveWon: boolean;
 }

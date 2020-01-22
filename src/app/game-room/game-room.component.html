@@ -42,7 +42,7 @@
                     <tr class="ligne-tableau" *ngFor="let aGameToJoin of gamesToJoin">
                         <td class="table-id"> {{ aGameToJoin.id }}</td>
                         <td class="table-numberOfPlayers"> {{ aGameToJoin.hands.length }}/{{ aGameToJoin.hands.length + aGameToJoin.nbPlayerMissing }}</td>
-                        <td class="table-join"> <a class="registerbtn" (click)="join(aGameToJoin)"> Join </a> </td>
+                        <td class="table-join"> <a class="registerbtn" (click)="join(aGameToJoin)">__Join__</a> </td>
                     </tr>                     
                 </tbody>
             </table>
@@ -62,10 +62,11 @@
                         <div *ngIf="aGameToPlay.nbPlayerMissing == 0; else waiting">
                             <div *ngIf="getHandOfPlayer(aGameToPlay)">
                                 <td class="table-join">
-                                        <div *ngIf="aHand.hasLeft; else play">
-                                                You have quit the Game 
+                                        <div *ngIf="aGameToPlay.isFinished ; else play">
+                                                <!-- You have quit the Game  -->
+                                                <a class="registerbtn" routerLink="/game/{{ aGameToPlay.uuid }}">_review_</a>
                                         </div>
-                                        <ng-template #play><a class="registerbtn" routerLink="/game/{{ aGameToPlay.uuid }}"> play </a></ng-template>
+                                        <ng-template #play><a class="registerbtn" routerLink="/game/{{ aGameToPlay.uuid }}">__play__</a></ng-template>
                                 </td>
                             </div>
                         </div>

@@ -1,0 +1,153 @@
+#container-game
+{
+    position: relative;
+    z-index: 3;
+    padding: 2%;
+    display: flex;
+
+}
+#table-game
+{
+    position: relative;
+    width: 70%;
+    background-color: rgba(0, 0, 50, 0.3);
+    border: ridge 1px rgba(0, 200, 255, 1);
+    color: white;
+    margin: top;
+    padding: 1%;
+    text-align: center;
+    margin-right: 1%;
+}
+.table-head{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+.column-nickname {
+    width: 15%;
+}
+#table-board {
+    width: 30%;
+}
+.area-button
+{
+    position: relative;
+    display: flex;
+    margin-top: 5%;
+}
+.player-won {
+    background-image: url('../../assets/images/victory.png');
+    background-size: cover;
+    padding: 6%;
+    margin: 4%;
+    display: flex;
+    justify-content: center;
+}
+.player-loose {
+    background-image: url('../../assets/images/defeat.png');
+    background-size: cover;
+    padding: 6%;
+    margin: 4%;
+    display: flex;
+    justify-content: center;
+}
+.messageEnd {
+    color: white;
+    margin-bottom: 40%;
+    font-family: sans-serif;
+    font-size: 1.3em;
+}
+/* BOUTON POUR RETOURNER SUR LA GAMEROOM ***************************************/
+
+.backbtn
+{
+    cursor: pointer;
+    width: 50%;
+    height: 50px;
+    font-size: 15px;
+    float: right;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.50);
+    border: ridge 2px cyan;
+    border-radius: 10px;
+    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em cyan;
+    color: cyan;
+    margin-right: 5px;
+}
+/* BOUTON POUR QUITTER LA PARTIE ***************************************/
+
+.leavebtn
+{
+    cursor: pointer;
+    width: 50%;
+    height: 50px;
+    font-size: 15px;
+    float: right;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.50);
+    border: ridge 2px red;
+    border-radius: 10px;
+    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em cyan;
+    color: red;
+}
+/* CALL OF ANIMATION **************************************************************************************************/
+.animate
+{
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+
+    animation-duration: 10s;
+    animation-name: xwings-move;
+    animation-iteration-count: infinite;
+}
+
+.animate2
+{
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+
+    animation-duration: 10s;
+    animation-name: tie-move;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}   
+
+/* ANIMATIONS **************************************************************************************************************/
+
+@keyframes xwings-move {
+    from
+    {
+        left: 100%;
+    }
+    to
+    {
+        left: -50%;
+    }
+}
+
+@keyframes tie-move {
+    0%
+    {
+        top: 100%;
+        left: 100%;
+    }
+    15%
+    {
+        top: 100%;
+        left: 100%;
+    }
+    45%
+    {
+        top: 70%;
+        left: 50%;
+    }
+    100%
+    {
+        top: 50%;
+        left: -50%;
+    }
+}

@@ -1,10 +1,7 @@
 /* HTML ***************************************************************************************************************/
 html
 {
-    width: 100%;
     height: 100%;
-
-    overflow: hidden;
 }
 
 
@@ -20,9 +17,6 @@ body
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-
-    height:100%;
-    width: 100%;
 }
 
 
@@ -129,7 +123,8 @@ li
 
 .panel-newGame
 {
-
+    display: flex;
+    justify-content: center;
 }
 
 .radio
@@ -172,35 +167,24 @@ li
 .panel-gameRoom
 {
     z-index: 3;
-
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 99%;
 }
 
 .panel-games
 {
-    margin: 0;
-    padding: 0;
     z-index: 3;
-    width: 99%;
-    height: 400px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    min-height: 60vh;
 }
 
 .mygames, .availablegames
 {
     background: rgba(0,0,15,.7);
     border: ridge 2px rgba(0, 200, 255, 0.7);
-    padding: 0;
-    margin: 0;
+    margin: 1%;
     width: 50%;
-    height: 400px;
     text-align: center;
-    overflow: auto;
 }
 
 .mygames li, .availablegames li
@@ -210,7 +194,6 @@ li
 
 .mygames a, .availablegames a
 {
-    margin-left: 30px;
     text-decoration: none;
     padding: 3px;
 }
@@ -218,18 +201,7 @@ li
 
 /* PLAY A GAME ********************************************************************************************************/
 /* CONTAINER **************************************************/
-#containerGame
-{
-    position: relative;
-    z-index: 3;
 
-    height: 100%;
-    width: 99%;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
 
 #currentGame
 {
@@ -245,30 +217,6 @@ li
     padding: 0;
 }
 
-#gameHistory
-{
-    position: relative;
-    width: 25%;
-    height: 400px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    text-align: center;
-}
-
-#table-area
-{
-    border: ridge 1px rgba(0, 200, 255, 1);
-    position: relative;
-    width: 100%;
-    height: 345px;
-
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
 .button-area
 {
     padding: 10;
@@ -280,66 +228,7 @@ li
     flex-direction: row;
 }
 
-/* TABLEAU ****************************************************/
-.table-game
-{
-    width: 100%;
-    height: 85%;
-}
-.column-nickname
-{
-    table-layout: auto;
-    width: 20%;
-}
-.column-cards
-{
-    table-layout: auto;
-    width: 70%;
-}
-.column-board
-{
-    table-layout: auto;
-    width: 10%;
-}
 
-/* LIGNE JOUEUR COURANT ***************************************/
-.currentPlayer
-{
-    background-color: rgba(0, 200, 255, 0.7);
-    height: 60px;
-}
-
-/* LIGNE JOUEUR ATTENTE ***************************************/
-.otherPlayer
-{
-    height: 60px;
-}
-
-
-.playerCards
-{
-    display: inline-block;
-    align-items: center;
-    height: 80px;
-}
-
-/* BOUTON POUR QUITTER LA PARTIE ***************************************/
-
-.leavebtn
-{
-    cursor: pointer;
-    width: 50%;
-    height: 50px;
-    font-size: 15px;
-    float: right;
-    margin: 0;
-    padding: 0;
-    background-color: rgba(0, 0, 0, 0.50);
-    border: ridge 2px red;
-    border-radius: 10px;
-    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em cyan;
-    color: red;
-}
 
 .leavebtn a {
     text-decoration: none;
@@ -352,23 +241,7 @@ li
     font-weight: bold;
 }
 
-/* BOUTON POUR RETOURNER SUR LA GAMEROOM ***************************************/
 
-.backbtn
-{
-    cursor: pointer;
-    width: 50%;
-    height: 50px;
-    font-size: 15px;
-    float: right;
-    margin: 0;
-    padding: 0;
-    background-color: rgba(0, 0, 0, 0.50);
-    border: ridge 2px cyan;
-    border-radius: 10px;
-    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em cyan;
-    color: cyan;
-}
 
 .backbtn a {
     text-decoration: none;
@@ -382,16 +255,6 @@ li
 }
 
 
-/* CARDS **************************************************************************************************************/
-.cards img
-{
-    border: ridge 2px rgba(0, 255, 0, 0);
-}
-
-.cards img:hover
-{
-    border: ridge 2px rgba(0, 255, 255, 1);
-}
 
 
 /* REGISTER ***********************************************************************************************************/
@@ -504,12 +367,6 @@ li
 {
     width: 33%;
     font-size: 15px;
-}
-
-/* RANKING PAGE */
-.list-rank
-{
-
 }
 
 .pseudo, .score
@@ -713,66 +570,4 @@ li
     color: #00CCFF;
     list-style-type: none;
     text-decoration: none;
-}
-
-
-/* CALL OF ANIMATION **************************************************************************************************/
-.animate
-{
-    position: absolute;
-    z-index: 2;
-    top: 50%;
-
-    animation-duration: 10s;
-    animation-name: xwings-move;
-    animation-iteration-count: infinite;
-}
-
-.animate2
-{
-    position: absolute;
-    z-index: 2;
-    top: 50%;
-
-    animation-duration: 10s;
-    animation-name: tie-move;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-
-
-/* ANIMATIONS **************************************************************************************************************/
-
-@keyframes xwings-move {
-    from
-    {
-        left: 100%;
-    }
-    to
-    {
-        left: -50%;
-    }
-}
-
-@keyframes tie-move {
-    0%
-    {
-        top: 100%;
-        left: 100%;
-    }
-    15%
-    {
-        top: 100%;
-        left: 100%;
-    }
-    45%
-    {
-        top: 70%;
-        left: 50%;
-    }
-    100%
-    {
-        top: 50%;
-        left: -50%;
-    }
 }

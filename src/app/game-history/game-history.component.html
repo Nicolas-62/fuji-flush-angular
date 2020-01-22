@@ -1,21 +1,11 @@
-<div id="gameHistory">
-    <div id="table-area">
-        <table class="list-rank">
-            <thead class="header-table">
-            <h3> GAME History </h3>
-            </thead>
-
-            <tbody class="body-table">
-            <tr *ngFor="let aGameEvent of gameEvents">
-                <td class="ranka"> {{ aGameEvent.date }} </td>
-                <td class="pseudo"> {{ aGameEvent.message }} </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="button-area">
-        <button class="backbtn"><a  routerLink="/games">Back</a></button>
-        <button class="leavebtn"><a (click)="leave()">Leave</a></button>
+<div id="history-game">
+    <h3> GAME History </h3>
+    <div class="list-rank">
+        <div class="table-head">
+        </div>
+        <div class="table-event" *ngFor="let aGameEvent of gameEvents">
+            <span> {{ aGameEvent.date }} </span>
+            <span> {{ aGameEvent.message }} </span>
+        </div>
     </div>
 </div>

@@ -20,31 +20,28 @@ export class RoomService {
   };
   
   constructor(private http:HttpClient) { 
-    this.getGames();
+    console.log("roomService construct..")
+ //   this.getGames();
   }
   subscribeToRoomWebSocket(player: User){
     this.roomWebSocket = webSocket('ws://localhost:9000/websocket/room?email='+ player.email);
     this.roomWebSocket.subscribe(
-      gameReceived =>{
-          /* find if game already existe */
-          const gameIndexToRemove = this.games.findIndex(
-            (game) => {
-              if(game.uuid === gameReceived.uuid){
-                return true;
-              }
-            }
-          );
-          /* if not also it's a new game, push it */
-          if(gameIndexToRemove == -1){
-            this.games.push(gameReceived);
-          }
-          else{
-            /* replace 1 element at index 'gameIndexToRemove' to gameReceived */
-            this.games.splice(gameIndexToRemove, 1, gameReceived);
-          }
-        console.log("game added received from WS (id) : "+ gameReceived.id);
+      gamesReceived =>{
+        this.games = gamesReceived;
+        console.log("games received from WS (nb games) : "+ this.games.length);
         this.emitGames();     
     });
+  }
+  getGames(){
+    console.log("start request get all games");
+    this.http.get<Game[]>(this.API_URL+"/games")   
+    .subscribe(
+      games => {
+        this.games = games ? games : [];
+        console.log("games received from API (nb games) : "+ this.games.length);
+        this.emitGames();     
+      }
+    );
   }
   emitGames(){
     this.gamesSubject.next(this.games);
@@ -56,17 +53,6 @@ export class RoomService {
     const game = new Game(nbPlayer);
     game.author = user;  
     this.roomWebSocket.next(game);
-  }
-  getGames(){
-    console.log("start request get all games");
-    this.http.get<Game[]>(this.API_URL+"/games")      
-    .subscribe(
-      games => {
-        this.games = games ? games : [];
-        console.log("games received from server : "+ this.games.length);
-        this.emitGames();     
-      }
-    );
   }
   addGame(nbPlayer: number, user: User){
     const game = new Game(nbPlayer);

@@ -15,6 +15,7 @@ export class GameService {
   gameWebSocket: WebSocketSubject<any>;
 
   constructor(private http:HttpClient) { 
+    console.log("gameService construct..")
   }
 
   getGame(uuid: string): Observable<Game> {
@@ -30,7 +31,7 @@ export class GameService {
     this.gameWebSocket.subscribe(
       gameReceived => {
         this.game = gameReceived;
-        console.log("game play received from WS (id) : "+ gameReceived.id);
+        console.log("game received from WS (id) : "+ gameReceived.id);
         this.emitGame();
       }
     )

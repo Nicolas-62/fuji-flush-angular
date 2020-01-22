@@ -1,38 +1,30 @@
-<div id="containerGame">
-    <div id="currentGame" *ngIf="!game.isFinished">
+<div id="container-game"  *ngIf="!game.isFinished; else gameEnd">
+    <div id="table-game">
         <h3>Current Game </h3>
-        <table class="table-game">
-            <thead>
-                <td> NICKNAME </td>
-                <td> CARDS </td>
-                <td> BOARD </td>
-            </thead>
-            <tbody>
-                <div *ngFor="let aHand of game.hands; let i = index">
-                    <div *ngIf="aHand.player.email === player.email; else otherHand">
-                        <app-player-hand [game]="game" [hand]="aHand"></app-player-hand>
-                    </div>
-                    <ng-template #otherHand><app-other-hand [game]="game" [hand]="aHand" [index]="i"></app-other-hand></ng-template>
-                </div>
-            </tbody>
-        </table>
+        <div class="table-head">
+            <div class="column-nickname"> NICKNAME </div>
+            <div class="cards"> CARDS </div>
+            <div> BOARD </div>
+        </div>
+        <div *ngFor="let aHand of game.hands; let i = index">
+            <div *ngIf="aHand.player.email === player.email; else otherHand">
+                <app-player-hand [game]="game" [hand]="aHand"></app-player-hand>
+            </div>
+            <ng-template #otherHand><app-other-hand [game]="game" [hand]="aHand" [index]="i"></app-other-hand></ng-template>
+        </div>
     </div> 
-    <app-game-history [game]="game"></app-game-history>
-
+    <div id="table-board">
+        <app-game-history [game]="game"></app-game-history>
+        <div class="area-button">
+            <button class="backbtn"><a  routerLink="/games">Back</a></button>
+            <button class="leavebtn"><a href="/games" (click)="leave()">Leave</a></button>
+        </div>
+    </div>
 </div>
-<!-- #{/if}
-
-#{else}
-
-#{if handPlayer.hasWon}
-<img src="/public/images/victory.png" class="resultImage">
-#{/if}
-#{else}
-#{if handPlayer.hasLeaveWon}
-<img src="/public/images/victory.png" class="resultImage">
-#{/if}
-#{else}
-<img src="/public/images/defeat.png" class="resultImage">
-#{/else}
-#{/else}
-#{/else} -->
+<ng-template #gameEnd>
+    <div [ngClass]="{'player-won' : playerHand.hasWon || playerHand.hasLeaveWon,
+    'player-loose': !playerHand.hasWon && !playerHand.hasLeaveWon }">
+        <p class="messageEnd" *ngFor="let winnerHand of game.winners">{{ winnerHand.player.nickName }} WON !</p>
+    </div>
+        <!-- <img  class="{{ imgClassToDisplay | async}}" alt="game ending info"> -->
+</ng-template>

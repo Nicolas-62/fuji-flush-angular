@@ -21,10 +21,10 @@ export class PlayerHandComponent implements OnInit, OnDestroy {
   player: User;
 
   constructor(private gameService: GameService,
-              private authSerice: AuthService) { }
+              private authService: AuthService) { }
 
   ngOnInit() {
-    this.player = this.authSerice.player;
+    this.player = this.authService.player;
     this.isTheCurrentPlayer(this.game);
     this.gameSubscription = this.gameService.gameSubject.subscribe(
       gameReceived => {
@@ -39,8 +39,7 @@ export class PlayerHandComponent implements OnInit, OnDestroy {
     this.hand = game.hands.find(
       (hand) => { 
         hand.player.email === this.player.email;
-      });
-      
+      });     
   }
   // check if he's the current player
   isTheCurrentPlayer(game: Game){
@@ -51,7 +50,7 @@ export class PlayerHandComponent implements OnInit, OnDestroy {
     }
   }
   playCard(cardIndex: number){
-    this.gameService.playCard(cardIndex);
+    if(this.currentPlayer) this.gameService.playCard(cardIndex);
   }
   ngOnDestroy() {
     this.gameSubscription.unsubscribe();

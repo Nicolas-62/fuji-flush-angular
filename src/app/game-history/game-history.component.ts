@@ -30,7 +30,4 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.gameSubscription.unsubscribe();
   }
-  leave() {
-    this.gameService.leave();
-  }  
 }

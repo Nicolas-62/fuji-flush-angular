@@ -1,20 +1,17 @@
-
-<tr [ngClass]="{'currentPlayer' : currentPlayer,
-                'otherPlayer' : !currentPlayer } " height="80">
+<div [ngClass]="{'current-player' : currentPlayer,
+                'other-player' : !currentPlayer,
+                'leave-player' :  hand.hasLeft } ">
  <!-- NICKNAME -->
-    <td class="column-nickname">{{ player.nickName }} <span *ngIf="hand.hasLeft">left the game</span></td>
+    <div class="column-nickname">{{ player.nickName }}<span *ngIf="hand.hasLeft">, left the game</span></div>
     <!-- CARDS -->
-    <td class="cards"  *ngFor="let card of hand.cards; let i = index">
-        <div *ngIf="currentPlayer; else cardcantplay">
-            <a class="playCard" href="#" (click)="playCard(i)">
-                <img src="../../assets/images/png/{{ card.value }}.png" class="playerCards"/>
-            </a>
+    <div class="cards">
+        <div *ngFor="let card of hand.cards; let i = index" [ngClass]="{'card-play' : currentPlayer}" (click)="playCard(i)">
+            <img src="../../assets/images/png/{{ card.value }}.png"/>
         </div>
-        <ng-template #cardcantplay><img src="../../assets/images/png/{{ card.value }}.png" class="playerCards"/></ng-template>
-    </td>
+    </div>
     <!-- BOARD -->
-    <td *ngIf="hand.cardP == null; else cardPvalue">
+    <div *ngIf="hand.cardP == null; else cardPvalue">
         <img src="../../assets/images/png/dos.png" class="playerCards"/>
-    </td>
-    <ng-template #cardPvalue><img src="../../assets/images/png/{{ hand.cardP.value }}.png" class="playerCards"/></ng-template>
- </tr>
+    </div>
+    <ng-template #cardPvalue><img src="../../assets/images/png/{{ hand.cardP.value }}.png"/></ng-template>
+ </div>

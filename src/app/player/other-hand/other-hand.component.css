@@ -1,0 +1,34 @@
+/* LIGNE JOUEUR COURANT ***************************************/
+.current-player
+{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 200, 255, 0.7);
+}
+/* LIGNE JOUEUR ATTENTE ***************************************/
+.other-player
+{
+    display: flex;
+    justify-content: space-between;
+
+}
+.leave-player {
+    background-color: rgba(40, 10, 5, 0.5);
+}
+.column-nickname {
+    width: 15%;
+}
+.column-nickname span {
+    font-style: italic;
+}
+/* CARDS **************************************************************************************************************/
+img
+{
+    height: 60px;
+    border: ridge 2px rgba(0, 255, 0, 0);
+}
+
+.cards img:hover
+{
+    border: ridge 2px rgba(0, 255, 255, 1);
+}
