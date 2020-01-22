@@ -14,6 +14,7 @@ import { AuthService } from './services/auth.service';
 import { OtherHandComponent } from './player/other-hand/other-hand.component';
 import { GameService } from './services/game.service';
 import { AuthGuardService } from './services/auth-gard.service';
+import { RulesComponent } from './rules/rules.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AuthGuardService } from './services/auth-gard.service';
     GameHistoryComponent,
     PlayerHandComponent,
     SigninComponent,
-    OtherHandComponent
+    OtherHandComponent,
+    RulesComponent
   ],
   imports: [
     BrowserModule,

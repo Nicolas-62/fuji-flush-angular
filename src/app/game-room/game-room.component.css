@@ -1,0 +1,132 @@
+/* Panel GAMES composé des :
+    panel availablegames
+    panel mygames
+*/
+.panel-gameRoom
+{
+    z-index: 3;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.panel-games
+{
+    z-index: 3;
+    display: flex;
+    /* min-height: 60vh; */
+}
+
+.mygames, .availablegames
+{
+    background: rgba(0,0,15,.7);
+    border: ridge 2px rgba(0, 200, 255, 0.7);
+    margin: 1%;
+    width: 50%;
+    text-align: center;
+    height: 60vh;
+    overflow: hidden;
+}
+
+.mygames li, .availablegames li
+{
+    margin: 10px;
+}
+
+.mygames a, .availablegames a
+{
+    text-decoration: none;
+    padding: 3px;
+}
+.list-games {
+
+}
+
+
+/* TABLEAU *************************************************************************************************************/
+.header-div
+{
+    display: flex;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+.body-div
+{
+    width: 100%;
+    height: 40vh;
+    overflow-y: scroll;
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box;  
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+}
+
+.ligne-div, .ligne-div-mygames
+{
+    display: flex;
+    height: 30px;
+    font-size: 25px;
+}
+.ligne-div-mygames div:nth-child(3){
+    display: flex;
+    width: 33%;
+    justify-content: center;
+}
+
+.ligne-div:hover .ligne-div-mygames:hover
+{
+    background-color: rgba(0, 230, 255, 0.3);
+}
+
+
+/* GAME ROOM PAGE */
+.div-id, .div-numberOfPlayers
+{
+    width: 33%;
+    font-size: 15px;
+}
+.div-join {
+    width: 33%;
+    font-size: 15px;
+}
+
+.pseudo, .score
+{
+    width: 50%;
+}
+
+.connected
+{
+    height: 35px;
+    background-color: #00CCFF;
+    color: black;
+}
+
+.player
+{
+    height: 30px;
+    background-color: rgba(0, 0, 75, .7);
+}
+
+.total-joueur
+{
+    text-align: center;
+    color: white;
+}
+
+.form-title {
+    font-family: sans-serif;
+    color: white;
+    margin-right: 10px;
+}
+.form-new-game {
+    width: 40px;
+}

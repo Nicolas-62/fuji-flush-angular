@@ -17,16 +17,8 @@
 </header>
 
 <nav class="navigation">
-    <a routerLink="/ranking" class="navigation-item"> Ranking </a>
+    <a class="navigation-item" (click)="inProgress()"> Ranking </a>
     <a routerLink="/games" class="navigation-item"> Game Room </a>
-    <a routerLink="/records" class="navigation-item"> Records </a>
+    <a class="navigation-item" (click)="inProgress()"> Records </a>
     <a routerLink="/rules" class="navigation-item"> Game Rules </a>
 </nav>
-
-<div class="animate">
-    <img src="./assets/images/xwings.png">
-</div>
-
-<div class="animate2">
-    <img src="./assets/images/tie.png">
-</div>

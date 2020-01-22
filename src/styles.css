@@ -1,22 +1,23 @@
 /* HTML ***************************************************************************************************************/
-html
+/* html
 {
     height: 100%;
-}
+} */
 
 
 /* BODY - THE BACK OF THE WEBSITE *************************************************************************************/
 body
 {
     z-index: 1;
-
+    margin:0;
     background-image: url("./assets/images/wallpaper2.png");
     background-repeat: no-repeat;
-
+    background-color: black;
     background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
 }
 
 
@@ -126,14 +127,6 @@ li
     display: flex;
     justify-content: center;
 }
-
-.radio
-{
-    display: inline-block;
-    margin-bottom: 50px;
-    color: white;
-}
-
 .submitbtn
 {
     width: 200px;
@@ -159,44 +152,6 @@ li
     color: #00FF00;
 }
 
-
-/* Panel GAMES composé des :
-    panel availablegames
-    panel mygames
-*/
-.panel-gameRoom
-{
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-}
-
-.panel-games
-{
-    z-index: 3;
-    display: flex;
-    min-height: 60vh;
-}
-
-.mygames, .availablegames
-{
-    background: rgba(0,0,15,.7);
-    border: ridge 2px rgba(0, 200, 255, 0.7);
-    margin: 1%;
-    width: 50%;
-    text-align: center;
-}
-
-.mygames li, .availablegames li
-{
-    margin: 10px;
-}
-
-.mygames a, .availablegames a
-{
-    text-decoration: none;
-    padding: 3px;
-}
 
 
 /* PLAY A GAME ********************************************************************************************************/
@@ -323,76 +278,6 @@ li
 }
 
 
-/* TABLEAU *************************************************************************************************************/
-.tableau
-{
-    width: 99%;
-    color: white;
-}
-
-.header-table
-{
-    text-align: center;
-    color: white;
-    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 15px;
-
-    height: 20px;
-}
-
-.body-table
-{
-    text-align: center;
-    color: white;
-    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 15px;
-}
-
-.ligne-tableau
-{
-    height: 30px;
-    font-size: 25px;
-}
-
-.ligne-tableau:hover
-{
-    background-color: rgba(0, 230, 255, 0.3);
-}
-
-
-/* GAME ROOM PAGE */
-.table-id, .table-numberOfPlayers, .table-join
-{
-    width: 33%;
-    font-size: 15px;
-}
-
-.pseudo, .score
-{
-    width: 50%;
-}
-
-.connected
-{
-    height: 35px;
-    background-color: #00CCFF;
-    color: black;
-}
-
-.player
-{
-    height: 30px;
-    background-color: rgba(0, 0, 75, .7);
-}
-
-.total-joueur
-{
-    text-align: center;
-    color: white;
-}
-
 /* RECORDS PAGE */
 
 .container-records
@@ -511,30 +396,6 @@ li
 {
     width: 20%;
 }
-
-
-
-
-
-
-/* RULES OF THE GAME **************************************************************************************************/
-.panel-rules
-{
-    position: relative;
-    z-index: 4;
-
-    color: white;
-    font-size: 20px;
-}
-
-.video
-{
-    float: left;
-    margin: 10;
-}
-
-
-
 
 /* BOUTON **************************************************************************************************************/
 .registerbtn

@@ -38,20 +38,23 @@
 .player-won {
     background-image: url('../../assets/images/victory.png');
     background-size: cover;
-    padding: 6%;
-    margin: 4%;
+    width: 70%;
     display: flex;
     justify-content: center;
 }
 .player-loose {
     background-image: url('../../assets/images/defeat.png');
     background-size: cover;
-    padding: 6%;
-    margin: 4%;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+.container-end {
     display: flex;
     justify-content: center;
 }
 .messageEnd {
+    margin-right: 7px;
     color: white;
     margin-bottom: 40%;
     font-family: sans-serif;

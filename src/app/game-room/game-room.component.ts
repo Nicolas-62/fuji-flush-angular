@@ -61,7 +61,7 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   }
   // créer une partie
   onSubmit(form: NgForm) {
-    const nbPlayer = form.value['nbPlayer'];
+    const nbPlayer = form.value['nbPlayer'] ? form.value['nbPlayer'] : 3;
     this.roomService.addGameWS(nbPlayer, this.player);
   }
   ngOnDestroy(){

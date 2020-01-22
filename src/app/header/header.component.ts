@@ -9,7 +9,10 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
+  disabled: boolean = true;
   ngOnInit() {
   }
-
+  inProgress() {   
+    alert("cette page est en cours de développement");
+  }
 }

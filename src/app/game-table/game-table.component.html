@@ -22,9 +22,14 @@
     </div>
 </div>
 <ng-template #gameEnd>
-    <div [ngClass]="{'player-won' : playerHand.hasWon || playerHand.hasLeaveWon,
-    'player-loose': !playerHand.hasWon && !playerHand.hasLeaveWon }">
-        <p class="messageEnd" *ngFor="let winnerHand of game.winners">{{ winnerHand.player.nickName }} WON !</p>
+    <div class="container-end">
+        <div [ngClass]="{'player-won' : playerHand.hasWon || playerHand.hasLeaveWon,
+        'player-loose': !playerHand.hasWon && !playerHand.hasLeaveWon }">
+            <p class="messageEnd">{{ game.winners.length }} </p>
+            <p class="messageEnd" *ngIf="game.winners.length > 1">winners :</p>
+            <p class="messageEnd" *ngIf="game.winners.length == 1">winner :</p>
+            <p class="messageEnd" *ngFor="let winnerHand of game.winners">{{ winnerHand.player.nickName }}</p>
+        </div>
     </div>
         <!-- <img  class="{{ imgClassToDisplay | async}}" alt="game ending info"> -->
 </ng-template>

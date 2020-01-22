@@ -46,7 +46,7 @@ export class GameTableComponent implements OnInit, OnDestroy {
         if(game.isFinished){
           setTimeout(() =>{
             this.router.navigate(['/games']);
-          }, 3000);
+          }, 4000);
         }
       }
     );
