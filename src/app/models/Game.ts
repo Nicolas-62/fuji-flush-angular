@@ -11,7 +11,6 @@ export class Game{
     currentPlayer?: User;
     deck?: Card[];
     discard?: Card[];
-    winners?: User[];
     isFinished?: boolean;
     gameEvents?: GameEvent[];
     constructor(public nbPlayerMissing: number){}

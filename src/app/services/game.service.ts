@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class GameService {
 
   game: Game;
-  API_URL = "http://localhost:9000/api";
+  API_URL = "http://localhost:8080/api";
   gameSubject = new Subject<any>();
   gameWebSocket: WebSocketSubject<any>;
 

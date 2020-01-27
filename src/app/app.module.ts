@@ -15,7 +15,15 @@ import { OtherHandComponent } from './player/other-hand/other-hand.component';
 import { GameService } from './services/game.service';
 import { AuthGuardService } from './services/auth-gard.service';
 import { RulesComponent } from './rules/rules.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import * as SockJS from 'sockjs-client';
+import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
+import { myRxStompConfig } from './my-rx-stomp.config';
 
+export function socketProvider() {
+  return new SockJS('http://localhost:8080/api');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,9 +41,22 @@ import { RulesComponent } from './rules/rules.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
-  providers: [AuthService, GameService, AuthGuardService],
+  providers: [AuthService, 
+    GameService, 
+    AuthGuardService,
+    {
+      provide: InjectableRxStompConfig,
+      useValue: myRxStompConfig
+    },
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+      deps: [InjectableRxStompConfig]
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,7 +6,8 @@ import { Game } from '../models/Game';
 import { User } from '../models/User';
 import { Hand } from '../models/Hand';
 import { AuthService } from '../services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { RxStompService } from '@stomp/ng2-stompjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-game-room',
@@ -28,16 +29,20 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   aHand: Hand;
   
   constructor(private roomService: RoomService, 
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+
+    this.spinner.show();
     this.player = this.authService.player;
     // connection à l'emétteur du service.   
     this.gamesSubscription = this.roomService.gamesSubject.subscribe(
       (games: any[]) => {
         this.games = games;
         console.log("from gameRoom, received from roomService (nb games): " +this.games.length);  
-        this.orderGames();      
+        this.orderGames();     
+        this.spinner.hide(); 
     });
     // récupération des parties par le service
     this.roomService.getGames();
@@ -46,7 +51,7 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   }
   // rejoindre une partie
   join(game: Game) {
-    this.roomService.joinGameWS(game);
+    this.roomService.joinGameWS(game, this.player);
   }
   // récuperer la main du joueur pour voir si il a quitté la partie
   getHandOfPlayer(game: Game): boolean{
@@ -67,7 +72,8 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     console.log("component destroyed")
     this.gamesSubscription.unsubscribe();
-    this.roomService.roomWebSocket.unsubscribe();
+    this.roomService.topicSubscription.unsubscribe();
+    //this.roomService.roomWebSocket.unsubscribe();
   }  
   // classer le parties
   orderGames(){

@@ -7,6 +7,7 @@ import { Hand } from '../models/Hand';
 import { AuthService } from '../services/auth.service';
 import { Subscription, Observable } from 'rxjs';
 import { resolve } from 'url';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-game-table',
@@ -18,17 +19,20 @@ export class GameTableComponent implements OnInit, OnDestroy {
   // Variable qui écoute la partie émise par le service 
   gameSubscription: Subscription;
   game: Game;
+  winners: Hand[];
   // joueur courant
   player: User;
   playerHand: Hand = null;
   constructor(private route: ActivatedRoute, 
               private router: Router,
               private gameService: GameService,
-              private authService: AuthService) { 
+              private authService: AuthService,
+              private spinner: NgxSpinnerService) { 
                 
               }
 
   ngOnInit() {
+    this.spinner.show();
     this.player = this.authService.player;
     // data récupérée durant la navigation
     console.log("game received from resolver (id) : " + this.route.snapshot.data.game.id)
@@ -42,8 +46,10 @@ export class GameTableComponent implements OnInit, OnDestroy {
       game => {
         console.log("from gameTable, received from gameService (id): " +  game.uuid);
         this.game = game;
-        this.setHand;
+        this.setHand();
+        this.spinner.hide();
         if(game.isFinished){
+          this.setWinners();
           setTimeout(() =>{
             this.router.navigate(['/games']);
           }, 4000);
@@ -71,6 +77,13 @@ export class GameTableComponent implements OnInit, OnDestroy {
           this.playerHand = this.game.hands[i];
           break;
         }
+    }
+  }
+  setWinners(): void {
+    for(let i=0; i< this.game.hands.length; i++){
+      if(this.game.hands[i].hasWon){
+        this.winners.push(this.game.hands[i]);
+      }
     }
   }
   ngOnDestroy(){

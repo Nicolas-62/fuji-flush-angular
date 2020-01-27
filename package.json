@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --base-href /fuji-flush-online --proxy-config proxy.conf.json",
+    "build": "ng build --prod --base-href /fuji-flush-online",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~8.2.14",
+    "@angular/animations": "^8.2.14",
     "@angular/common": "~8.2.14",
     "@angular/compiler": "~8.2.14",
     "@angular/core": "~8.2.14",
@@ -19,8 +19,12 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@stomp/ng2-stompjs": "^7.2.0",
+    "@stomp/stompjs": "^5.4.3",
     "ngx-socket-io": "^3.0.1",
+    "ngx-spinner": "^8.1.0",
     "rxjs": "~6.4.0",
+    "sockjs-client": "^1.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
