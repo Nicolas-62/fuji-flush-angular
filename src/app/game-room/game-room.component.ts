@@ -72,8 +72,9 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     console.log("component destroyed")
     this.gamesSubscription.unsubscribe();
-    this.roomService.topicSubscription.unsubscribe();
-    //this.roomService.roomWebSocket.unsubscribe();
+    if(this.roomService.roomSubscription != null){
+      this.roomService.roomSubscription.unsubscribe();
+    }
   }  
   // classer le parties
   orderGames(){
@@ -92,7 +93,9 @@ export class GameRoomComponent implements OnInit, OnDestroy {
         if(joined){
           this.gamesToPlay.push(game);
         }else{
-          this.gamesToJoin.push(game);
+          if(game.nbPlayerMissing != 0){
+            this.gamesToJoin.push(game);
+          }
         }
       // }
     });

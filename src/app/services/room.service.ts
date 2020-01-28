@@ -16,7 +16,7 @@ export class RoomService {
   games: Game[] = [];
   gamesSubject = new Subject<Game[]>();
   roomWebSocket: WebSocketSubject<any>;
-  topicSubscription: Subscription;
+  roomSubscription: Subscription;
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,17 +28,10 @@ export class RoomService {
  //   this.getGames();
   }
   subscribeToRoomWebSocket(player: User){
-    this.topicSubscription =  this.rxStompService.watch('/send/games').subscribe((gamesReceived: Message) => {
+    this.roomSubscription =  this.rxStompService.watch('/send/games').subscribe((gamesReceived: Message) => {
       this.games = JSON.parse(gamesReceived.body);
       this.emitGames(); 
     });
-    // this.roomWebSocket = webSocket('ws://localhost:9000/websocket/room?email='+ player.email);
-    // this.roomWebSocket.subscribe(
-    //   gamesReceived =>{
-    //     this.games = gamesReceived;
-    //     console.log("games received from WS (nb games) : "+ this.games.length);
-    //     this.emitGames();     
-    // });
   }
   getGames(){
     console.log("start request get all games");
@@ -55,15 +48,14 @@ export class RoomService {
     this.gamesSubject.next(this.games);
   }
   joinGameWS(game: Game, player: User){
-    //this.roomWebSocket.next(game);
     this.rxStompService.publish({
       destination: "/api/ws/joinGame", 
-      body: JSON.stringify({gameUuid : game.uuid, playerEmail : player.email})});
+      body: JSON.stringify({gameUuid : game.uuid, playerEmail : player.email})
+    });
   }
   addGameWS(nbPlayer: number, user: User){
     const game = new Game(nbPlayer);
     game.author = user;  
-    //this.roomWebSocket.next(game);
     this.rxStompService.publish({destination: '/api/ws/addGame', body: JSON.stringify(game)});
   }
   addGame(nbPlayer: number, user: User){
@@ -78,27 +70,4 @@ export class RoomService {
           this.emitGames();     
       });
   }
-  // private log(message: string){
-  //   this.messageService.add(message);
-  // }
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-  
-      // TODO: send the error to remote logging infrastructure
-      console.error("error : "+error.message); // log to console instead
-  
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
-  
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-  
 }

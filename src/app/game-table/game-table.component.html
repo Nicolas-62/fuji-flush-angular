@@ -17,7 +17,7 @@
         <app-game-history [game]="game"></app-game-history>
         <div class="area-button">
             <button class="backbtn"><a  routerLink="/games">Back</a></button>
-            <button class="leavebtn"><a href="/games" (click)="leave()">Leave</a></button>
+            <button class="leavebtn"><a routerLink="/games" (click)="leave()">Leave</a></button>
         </div>
     </div>
 </div>
@@ -28,7 +28,7 @@
             <p class="messageEnd">{{ winners.length }} </p>
             <p class="messageEnd" *ngIf="winners.length > 1">winners :</p>
             <p class="messageEnd" *ngIf="winners.length == 1">winner :</p>
-            <p class="messageEnd" *ngFor="let winnerHand of winners">{{ winnerHand.player.nickName }}</p>
+            <p class="messageEnd" *ngFor="let winnerHand of winners">- {{ winnerHand.player.nickName }}</p>
         </div>
     </div>
         <!-- <img  class="{{ imgClassToDisplay | async}}" alt="game ending info"> -->

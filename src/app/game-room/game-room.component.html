@@ -43,7 +43,7 @@
                 <div class="div-join"> State </div>
                 </div>
                 <div class="body-div">
-                    <tr class="ligne-div-mygames" *ngFor="let aGameToPlay of gamesToPlay">
+                    <div class="ligne-div-mygames" *ngFor="let aGameToPlay of gamesToPlay">
                         <div class="div-id"> {{ aGameToPlay.id }}</div>
                         <div class="div-numberOfPlayers"> {{ aGameToPlay.hands.length }}/{{ aGameToPlay.hands.length + aGameToPlay.nbPlayerMissing }}</div>
                         <div *ngIf="aGameToPlay.nbPlayerMissing == 0; else waiting">
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <ng-template #waiting><div class="div-join"> Waiting..</div></ng-template>
-                    </tr>                     
+                    </div>                     
                 </div>
 
             </div>

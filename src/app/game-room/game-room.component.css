@@ -72,16 +72,18 @@
 .ligne-div, .ligne-div-mygames
 {
     display: flex;
-    height: 30px;
+    height: 34px;
     font-size: 25px;
+    align-items: center;
 }
 .ligne-div-mygames div:nth-child(3){
     display: flex;
     width: 33%;
     justify-content: center;
+    align-items: center;
 }
 
-.ligne-div:hover .ligne-div-mygames:hover
+.ligne-div:hover, .ligne-div-mygames:hover
 {
     background-color: rgba(0, 230, 255, 0.3);
 }

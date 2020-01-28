@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { Subscription, Observable } from 'rxjs';
 import { resolve } from 'url';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-game-table',
@@ -47,13 +48,13 @@ export class GameTableComponent implements OnInit, OnDestroy {
         console.log("from gameTable, received from gameService (id): " +  game.uuid);
         this.game = game;
         this.setHand();
-        this.spinner.hide();
         if(game.isFinished){
           this.setWinners();
           setTimeout(() =>{
             this.router.navigate(['/games']);
           }, 4000);
         }
+        this.spinner.hide();
       }
     );
     // on fait émettre le service
@@ -62,7 +63,8 @@ export class GameTableComponent implements OnInit, OnDestroy {
     this.gameService.subscribeToGameWebSocket(this.player.email);
   }
   leave() {
-    this.gameService.leave();
+    this.spinner.show();
+    this.gameService.leave(this.game.uuid, this.game.hands.indexOf(this.playerHand));  
   }  
   // find the hand of the player
   // setHand = () => {
@@ -80,6 +82,7 @@ export class GameTableComponent implements OnInit, OnDestroy {
     }
   }
   setWinners(): void {
+    this.winners = [];
     for(let i=0; i< this.game.hands.length; i++){
       if(this.game.hands[i].hasWon){
         this.winners.push(this.game.hands[i]);
@@ -88,6 +91,8 @@ export class GameTableComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(){
     this.gameSubscription.unsubscribe();
-    this.gameService.gameWebSocket.unsubscribe();
+    if(this.gameService.gameWebSocket != null){
+      this.gameService.gameWebSocket.unsubscribe();
+    }
   }  
 }

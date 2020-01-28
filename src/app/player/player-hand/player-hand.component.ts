@@ -50,7 +50,7 @@ export class PlayerHandComponent implements OnInit, OnDestroy {
     }
   }
   playCard(cardIndex: number){
-    if(this.currentPlayer) this.gameService.playCard(cardIndex);
+    if(this.currentPlayer) this.gameService.playCard(this.game.uuid, this.game.hands.indexOf(this.hand), cardIndex);
   }
   ngOnDestroy() {
     this.gameSubscription.unsubscribe();
