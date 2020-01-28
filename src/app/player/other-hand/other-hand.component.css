@@ -4,12 +4,16 @@
     display: flex;
     justify-content: space-between;
     background-color: rgba(0, 200, 255, 0.7);
+    margin-right: 1%;
+    margin-left: 1%;
 }
 /* LIGNE JOUEUR ATTENTE ***************************************/
 .other-player
 {
     display: flex;
     justify-content: space-between;
+    margin-right: 1%;
+    margin-left: 1%;
 
 }
 .leave-player {

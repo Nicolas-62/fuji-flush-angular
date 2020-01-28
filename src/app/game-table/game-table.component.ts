@@ -63,16 +63,8 @@ export class GameTableComponent implements OnInit, OnDestroy {
     this.gameService.subscribeToGameWebSocket(this.player.email);
   }
   leave() {
-    this.spinner.show();
     this.gameService.leave(this.game.uuid, this.game.hands.indexOf(this.playerHand));  
   }  
-  // find the hand of the player
-  // setHand = () => {
-  //   this.playerHand = this.game.hands.find(
-  //     (hand) => { 
-  //       hand.player.email === this.player.email;
-  //     });     
-  // }
   setHand(): void {
     for(let i=0; i< this.game.hands.length; i++){
         if(this.game.hands[i].player.email === this.player.email){

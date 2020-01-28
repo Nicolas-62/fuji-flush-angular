@@ -1,17 +1,13 @@
 <header>
     <div class="bandeau">
         <div class="header-title">
-            <h1>FUJI FLUSH SPACE</h1>
+            FUJI FLUSH SPACE
         </div>
-        <div class="header-infos">
-    <!-- #{if controllers.Security.isConnected()}
-        <span>User : ${controllers.Security.connectedUser().nickName} </span>
-        <a href="@{Secure.logout()}">Logout</a>
-    #{/if}
-    #{else}
-        <a href="@{Application.gameRoom()}"> Login </a>
-        <a href="@{Home.register()}"> Register </a>
-    #{/else} -->
+        <div *ngIf="player != null">
+            <div class="header-infos">           
+                <span>User : {{ player.nickName }} </span>
+                <button class="logoutbtn" (click)="logout()">Logout</button>
+            </div>
         </div>
     </div>
 </header>

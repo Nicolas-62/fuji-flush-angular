@@ -21,55 +21,6 @@ body
 }
 
 
-/* HEADER - TITLE NICKNAME AND LOGOUT *********************************************************************************/
-header
-{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    height: 10%;
-    width: 100%;
-    margin-bottom: 20px;
-
-    background-color: rgba(0,0,0, .2);
-    font-family: 'Orbitron', sans-serif;
-}
-
-/* Titre FUJI FLUSH */
-
-.bandeau
-{
-    width: 99%;
-}
-
-.header-title
-{
-    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
-    text-align: center;
-}
-
-.header-infos
-{
-    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
-    text-align: right;
-    width: 90%;
-}
-
-header a, a:visited
-{
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    text-shadow: none;
-}
-
-header a:hover
-{
-    text-shadow: 1px 1px 2px black, 0 0 1em midnightblue, 0 0 0.2em cyan;
-}
-
-
-
 
 /* WHITE TITLE ********************************************************************************************************/
 h3
@@ -77,6 +28,7 @@ h3
     color: white;
     text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
     font-size: 25px;
+    font-family: 'Orbitron', sans-serif;
 }
 
 
@@ -138,6 +90,7 @@ li
     border-radius: 10px;
     text-shadow: 1px 1px 2px black, 0 0 1em #00FF00, 0 0 0.2em cyan;
     color: cyan;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .submitbtn:hover
@@ -223,7 +176,7 @@ li
 
 .form-saisie
 {
-    width: 400px;
+    width: 200px;
     margin: auto;
 
     text-align: center;
@@ -400,17 +353,16 @@ li
 /* BOUTON **************************************************************************************************************/
 .registerbtn
 {
-    width: 420px;
+    width: 200px;
     height: 50px;
-
     margin: auto;
     margin-bottom: 20px;
-
+    margin-top: 10px;  
     cursor: pointer;
-
     background-color: rgba(0, 0, 25, 0.9);
     border: ridge 2px rgba(0, 230, 255, 0.9);
     color: #00CCFF;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .registerbtn:visited

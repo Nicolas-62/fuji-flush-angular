@@ -2,11 +2,11 @@
   <form class="formulaire" (ngSubmit)="onSubmit(f)" #f="ngForm">
     <h1 class="titre">Login</h1>
     <p>Choisissez un joueur</p>
-    <label class="form-titre" for="email">
-          Email :
-    </label>
+    <!-- <label class="form-titre" for="email">
+          Joueurs disponibles :
+    </label> -->
     <select  class="form-saisie" id="email" name="email" ngModel required>
-      <option *ngFor="let player of players" value="{{ player.email }}" >{{ player.email }}</option>
+      <option *ngFor="let player of players" value="{{ player.email }}" >{{ player.nickName }}</option>
     </select>
     <button class="registerbtn"
               type="submit" 

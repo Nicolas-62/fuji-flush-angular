@@ -6,10 +6,9 @@
     overflow-y: scroll;
     padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
     box-sizing: content-box;
-    color: white;
+    color: lightgray;
     font-size: 1.1em;
     background-color: rgba(0, 0, 0, 0.7);
-    border: ridge 1px rgba(0, 200, 255, 1);
-    font-family: sans-serif;
+    font-family: 'Titillium Web', sans-serif;
     padding-left: 10px;
 }

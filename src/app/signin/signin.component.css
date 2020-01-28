@@ -2,3 +2,9 @@
 	font-style: italic;
 	font-size: 1.5em;
 }
+form{
+	font-family: 'Orbitron', sans-serif;
+}
+form label{
+	margin-bottom: 10px;
+}

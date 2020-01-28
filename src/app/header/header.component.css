@@ -1,0 +1,64 @@
+
+
+/* HEADER - TITLE NICKNAME AND LOGOUT *********************************************************************************/
+header
+{
+    margin-top: 15px;;
+    margin-bottom: 25px;
+    background-color: rgba(0,0,0, .2);
+    font-family: 'Orbitron', sans-serif;
+    min-height: 86px;
+}
+
+/* Titre FUJI FLUSH */
+
+.bandeau
+{
+    width: 99%;
+}
+
+.header-title
+{
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    text-align: center;
+    font-size: 2em;
+}
+
+.header-infos
+{
+    text-shadow: 1px 1px 2px black, 0 0 1em #00AAFF, 0 0 0.2em cyan;
+    text-align: right;
+    font-size: 1.5em;
+    margin-right: 10px;
+
+}
+.header-infos span{
+    margin-right: 15px;
+}
+
+header a, a:visited
+{
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+header a:hover
+{
+    text-shadow: 1px 1px 2px black, 0 0 1em midnightblue, 0 0 0.2em cyan;
+}
+.logoutbtn
+{
+    cursor: pointer;
+    font-size: 1em;
+    padding: 6px;
+    background-color: rgba(0, 0, 0, 0.50);
+    border: ridge 2px cyan;
+    border-radius: 10px;
+    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em cyan;
+    color: white;
+    margin-right: 5px;
+    font-family: 'Orbitron', sans-serif;
+}
+

@@ -14,14 +14,16 @@
     border: ridge 1px rgba(0, 200, 255, 1);
     color: white;
     margin: top;
-    padding: 1%;
     text-align: center;
     margin-right: 1%;
+    font-family: 'Titillium Web', sans-serif;
 }
 .table-head{
     display: flex;
     justify-content: space-between;
     margin-bottom: 2%;
+    margin-right: 1%;
+    margin-left: 1%;
 }
 .column-nickname {
     width: 15%;

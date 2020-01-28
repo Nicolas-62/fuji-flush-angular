@@ -25,7 +25,6 @@ export class SigninComponent implements OnInit {
 	const email = form.value['email'];
 	this.authService.signInUser(email).then((user: User) => {
         this.authService.player = user;
-		console.log("before navigate " + this.authService.player.email);
 		this.router.navigate(['/games']);
     });
   }
