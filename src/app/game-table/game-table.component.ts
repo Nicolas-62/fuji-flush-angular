@@ -52,7 +52,7 @@ export class GameTableComponent implements OnInit, OnDestroy {
           this.setWinners();
           setTimeout(() =>{
             this.router.navigate(['/games']);
-          }, 4000);
+          }, 2000);
         }
         this.spinner.hide();
       }
@@ -64,6 +64,7 @@ export class GameTableComponent implements OnInit, OnDestroy {
   }
   leave() {
     this.gameService.leave(this.game.uuid, this.game.hands.indexOf(this.playerHand));  
+    this.router.navigate(['/games']);
   }  
   setHand(): void {
     for(let i=0; i< this.game.hands.length; i++){
