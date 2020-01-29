@@ -70,4 +70,9 @@ export class RoomService {
           this.emitGames();     
       });
   }
+  addGameDemo(): Observable<Game>{
+    console.log("start request add game");
+    return this.http.get<any>("api/game/add/demo");    
+    
+  }
 }

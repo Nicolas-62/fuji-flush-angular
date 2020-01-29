@@ -48,19 +48,22 @@ export class GameTableComponent implements OnInit, OnDestroy {
         console.log("from gameTable, received from gameService (id): " +  game.uuid);
         this.game = game;
         this.setHand();
+        this.spinner.hide();
         if(game.isFinished){
           this.setWinners();
           setTimeout(() =>{
             this.router.navigate(['/games']);
           }, 2000);
         }
-        this.spinner.hide();
       }
     );
     // on fait émettre le service
     this.gameService.emitGame();
     // on se connecte au websocket du service
     this.gameService.subscribeToGameWebSocket(this.player.email);
+    if(this.game.author.email = "bob@g.com"){
+      this.launchGameDemo();
+    }
   }
   leave() {
     this.gameService.leave(this.game.uuid, this.game.hands.indexOf(this.playerHand));  
@@ -88,4 +91,19 @@ export class GameTableComponent implements OnInit, OnDestroy {
       this.gameService.gameWebSocket.unsubscribe();
     }
   }  
+  launchGameDemo(){
+    while(!this.game.isFinished){
+      for(let hand of this.game.hands){
+        if(hand.cards.length != 0){
+          setTimeout(() => {
+            this.playCardDemo(hand.cards.length-1, hand)
+          }, 1000)
+        }
+      }
+    }
+
+  }
+  playCardDemo(cardIndex: number, hand: Hand){
+    this.gameService.playCard(this.game.uuid, this.game.hands.indexOf(hand), cardIndex);
+  }
 }
