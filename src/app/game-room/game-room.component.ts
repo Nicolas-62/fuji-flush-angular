@@ -8,6 +8,7 @@ import { Hand } from '../models/Hand';
 import { AuthService } from '../services/auth.service';
 import { RxStompService } from '@stomp/ng2-stompjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-room',
@@ -30,7 +31,8 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   
   constructor(private roomService: RoomService, 
               private authService: AuthService,
-              private spinner: NgxSpinnerService) { }
+              private spinner: NgxSpinnerService,
+              private router: Router) { }
 
   ngOnInit() {
 
@@ -52,6 +54,9 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   // rejoindre une partie
   join(game: Game) {
     this.roomService.joinGameWS(game, this.player);
+  }
+  goToplay(gameUuid: string){
+    this.router.navigate(['/game/'+gameUuid]);
   }
   // récuperer la main du joueur pour voir si il a quitté la partie
   getHandOfPlayer(game: Game): boolean{

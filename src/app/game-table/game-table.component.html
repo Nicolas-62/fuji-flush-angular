@@ -17,8 +17,8 @@
     <div id="table-board">
         <app-game-history [game]="game"></app-game-history>
         <div class="area-button">
-            <button class="backbtn"><a  routerLink="/games">Back</a></button>
-            <button class="leavebtn"><a routerLink="/games" (click)="leave()">Leave</a></button>
+            <button class="backbtn" routerLink="/games">Back</button>
+            <button class="leavebtn" (click)="leave()">Leave</button>
         </div>
     </div>
 </div>

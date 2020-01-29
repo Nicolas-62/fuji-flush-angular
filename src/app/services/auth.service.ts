@@ -11,12 +11,13 @@ export class AuthService {
   playerSubject = new Subject<User>();
   
   availablePlayers: User[] = [
-    new User("bob@g.com", "Bob"),
-    new User("lisa@g.com", "Lisa"),
-    new User("alex@g.com", "Alex"),
-    new User("boba.fett@coaxys.com", "Boba"),
-    new User("dark.maul@coaxys.com", "Maul"),
-    new User("ki-adi-mundi@coaxys.com", "Ki-Adi-Mundi")
+    new User("anakin@g.com", "Anakin"),
+    new User("han.solo@g.com", "Han"),
+    new User("dark.vador@g.com", "Vador"),
+    new User("boba.fett@g.com", "Boba"),
+    new User("obi.wan@g.com", "Obi-Wan"),
+    new User("ki.adi.mundi@g.com", "Ki-Adi-Mundi"),
+    new User("leia@g.com", "Leia")
   ]
   constructor() { }
   emitPlayer(){
