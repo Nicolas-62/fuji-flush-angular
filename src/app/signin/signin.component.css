@@ -2,9 +2,32 @@
 	font-style: italic;
 	font-size: 1.5em;
 }
-form{
-	font-family: 'Orbitron', sans-serif;
-}
 form label{
 	margin-bottom: 10px;
+}
+.register
+{
+	min-height: 250px;
+    position: relative;
+    width: 40%;
+    z-index: 4;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,.5) 0%, rgba(0,200, 255, .4) 40%, rgba(255,255,255,.35) 50%, rgba(0,200, 255,.4) 60%, rgba(0,0,0,.5) 100%);
+	margin-bottom: 15px;;
+    border: ridge 2px rgba(0, 200, 255, 0.7);
+}
+.register-container{
+	display: flex;
+	font-family: 'Orbitron', sans-serif;
+	margin-top: 6vh;
+}
+h4{
+	letter-spacing: 1px;
+	color: white;
+}
+.registerbtn:hover
+{
+    background-color: rgba(0, 0, 0, 1);
+    text-shadow: 1px 1px 2px black, 0 0 1em #00FF00, 0 0 0.2em cyan;
+    font-weight: bold;
 }

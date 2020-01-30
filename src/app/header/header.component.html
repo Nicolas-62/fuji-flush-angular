@@ -1,20 +1,21 @@
-<header>
-    <div class="bandeau">
-        <div class="header-title">
-            FUJI FLUSH SPACE
-        </div>
-        <div *ngIf="player != null">
-            <div class="header-infos">           
-                <span>User : {{ player.nickName }} </span>
-                <button class="logoutbtn" (click)="logout()">Logout</button>
+<div class="volet">   
+    <header>
+        <div class="bandeau">
+            <div class="header-title">
+                FUJI FLUSH SPACE
+            </div>
+            <div *ngIf="player != null">
+                <div class="header-infos">           
+                    <span>User : {{ player.nickName }} </span>
+                    <button class="logoutbtn" (click)="logout()">Logout</button>
+                </div>
             </div>
         </div>
-    </div>
-</header>
-
-<nav class="navigation">
-    <a class="navigation-item" (click)="inProgress()"> Ranking </a>
-    <a routerLink="/games" class="navigation-item"> Game Room </a>
-    <a class="navigation-item" (click)="inProgress()"> Records </a>
-    <a routerLink="/rules" class="navigation-item"> Game Rules </a>
-</nav>
+    </header>
+    <nav class="navigation">
+        <a class="navigation-item" (click)="inProgress()"> Ranking </a>
+        <a routerLink="/games" class="navigation-item"> Game Room </a>
+        <a class="navigation-item" (click)="inProgress()"> Records </a>
+        <a routerLink="/rules" class="navigation-item"> Game Rules </a>
+    </nav>
+</div>

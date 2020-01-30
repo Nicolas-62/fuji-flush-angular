@@ -47,16 +47,21 @@
                         <div class="div-numberOfPlayers"> {{ aGameToPlay.hands.length }}/{{ aGameToPlay.hands.length + aGameToPlay.nbPlayerMissing }}</div>
                         <div *ngIf="aGameToPlay.nbPlayerMissing == 0; else waiting">
                             <div *ngIf="getHandOfPlayer(aGameToPlay)">
-                                <div class="div-state">
-                                        <div *ngIf="aGameToPlay.isFinished ; else play">
-                                                <!-- You have quit the Game  -->
-                                                <button class="actionbtn" routerLink="/game/{{ aGameToPlay.uuid }}">review</button>
+                                <div *ngIf="!aHand.hasLeft; else abandon">
+                                    <div class="div-state">
+                                        <!-- <div *ngIf="aGameToPlay.isFinished ; else play">
+                                            <button class="actionbtn" routerLink="/game/{{ aGameToPlay.uuid }}">review</button>
                                         </div>
-                                        <ng-template #play><button class="actionbtn" (click)="goToplay(aGameToPlay.uuid)">play</button></ng-template>
+                                        <ng-template #play><button class="actionbtn" (click)="goToplay(aGameToPlay.uuid)">play</button></ng-template> -->
+                                       <div *ngIf="!aGameToPlay.isFinished">
+                                            <button class="actionbtn" (click)="goToplay(aGameToPlay.uuid)">play</button>
+                                        </div>
+                                    </div>
                                 </div>
+                                <ng-template #abandon><div class="div-state">Abandon</div></ng-template>
                             </div>
                         </div>
-                        <ng-template #waiting><div class="div-state"> Waiting..</div></ng-template>
+                        <ng-template #waiting><div class="div-state"> Waiting...</div></ng-template>
                     </div>                     
                 </div>
 

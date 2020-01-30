@@ -29,24 +29,28 @@ export class PlayerHandComponent implements OnInit, OnDestroy {
     this.gameSubscription = this.gameService.gameSubject.subscribe(
       gameReceived => {
         this.game = gameReceived;
-        this.getHand(this.game);
+        this.setHand();
         this.isTheCurrentPlayer(this.game);       
       }
     );
   }
   // find the hand of the player
-  getHand(game: Game){
-    this.hand = game.hands.find(
-      (hand) => { 
-        hand.player.email === this.player.email;
-      });     
+  setHand(): void {
+    for(let i=0; i< this.game.hands.length; i++){
+        if(this.game.hands[i].player.email === this.player.email){
+          this.hand = this.game.hands[i];
+          break;
+        }
+    }
   }
   // check if he's the current player
   isTheCurrentPlayer(game: Game){
-    if(this.player.email == game.currentPlayer.email){
-      this.currentPlayer = true;
-    }else{
-      this.currentPlayer = false;
+    if(!game.isFinished){
+      if(this.hand.player.email == game.currentPlayer.email){
+        this.currentPlayer = true;
+      }else{
+        this.currentPlayer = false;
+      }
     }
   }
   playCard(cardIndex: number){

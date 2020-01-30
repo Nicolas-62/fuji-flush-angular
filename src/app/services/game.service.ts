@@ -19,7 +19,6 @@ export class GameService {
 
   constructor(private http:HttpClient,
     private rxStompService: RxStompService) { 
-    console.log("gameService construct..")
   }
   subscribeToGameWebSocket(email: string){
     this.gameSubscription =  this.rxStompService.watch('/send/game').subscribe((gamesReceived: Message) => {
@@ -33,13 +32,22 @@ export class GameService {
   getGame(uuid: string): Observable<Game> {
     return this.http.get<Game>("api/game/" + uuid);
   }
-  playCard( gameUuid : string, handIndex: number, cardIndex: number,){
+  playCard( gameUuid : string, handIndex: number, cardIndex: number){
     this.rxStompService.publish(
       {
         destination: '/api/ws/playCard', 
         body: JSON.stringify({gameUuid : gameUuid, handIndex : handIndex, cardIndex : cardIndex}),
       }
     );
+  }
+  playCardDemo(gameUuid : string, handIndex: number, cardIndex: number){
+    this.http.get<any>("api/game/demo/play?game="+gameUuid+"&hand="+handIndex+"&card="+cardIndex).subscribe(
+      (game: Game) => {
+        this.game = game;
+        this.emitGame();
+      }
+    );    
+    
   }
   leave(gameUuid : string, handIndex: number){
     this.rxStompService.publish(

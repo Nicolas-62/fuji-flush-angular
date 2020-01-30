@@ -17,7 +17,8 @@ export class AuthService {
     new User("boba.fett@g.com", "Boba"),
     new User("obi.wan@g.com", "Obi-Wan"),
     new User("ki.adi.mundi@g.com", "Ki-Adi-Mundi"),
-    new User("leia@g.com", "Leia")
+    new User("leia@g.com", "Leia"),
+    new User("alex@g.com", "Alex")
   ]
   constructor() { }
   emitPlayer(){

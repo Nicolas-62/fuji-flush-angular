@@ -10,7 +10,7 @@ body
 {
     z-index: 1;
     margin:0;
-    background-image: url("./assets/images/wallpaper2.png");
+    background-image: url("./assets/images/wallpaper2.jpg");
     background-repeat: no-repeat;
     background-color: black;
     background-size: cover;
@@ -48,7 +48,6 @@ h3
     margin: auto;
     background: rgb(0,0,0);
     background: linear-gradient(90deg, rgba(0,0,0,.5) 0%, rgba(0,200, 255, .4) 40%, rgba(255,255,255,.35) 50%, rgba(0,200, 255,.4) 60%, rgba(0,0,0,.5) 100%);
-
     border: ridge 2px rgba(0, 200, 255, 0.7);
 }
 
@@ -162,25 +161,6 @@ li
     text-align: center;
 }
 
-/* NAVIGATION **********************************************************************************************************/
-.navigation {
-    width: 99%;
-    height: 10%;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    width: 90%;
-    margin: auto;
-
-    padding: 0;
-}
-
-.navigation-item:hover
-{
-    background: linear-gradient(0deg, rgba(0,200,255,0.3) 0%, rgba(0,200,255,1) 61%, rgba(0,200,255,0.7) 100%);
-}
 
 /* RECORDS PAGE */
 

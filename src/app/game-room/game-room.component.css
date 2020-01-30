@@ -101,6 +101,9 @@
     width: 33%;
     font-size: 15px;
 }
+.div-state span{
+    width: 100%;
+}
 .actionbtn
 {
     width: 80px;

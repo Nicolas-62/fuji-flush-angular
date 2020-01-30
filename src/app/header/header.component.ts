@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.playerSubscription = this.authService.playerSubject.subscribe(
       (player: User) => {
-        console.log("player received")
         this.player = player;
       }
     );  

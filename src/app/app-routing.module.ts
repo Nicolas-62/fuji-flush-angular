@@ -6,12 +6,13 @@ import { SigninComponent } from './signin/signin.component';
 import { AuthGuardService } from './services/auth-gard.service';
 import { GameResolver } from './models/GameResolver';
 import { RulesComponent } from './rules/rules.component';
+import { GamesResolver } from './models/GamesResolver';
 
 const routes: Routes = [
     { path: '', redirectTo: 'signin', pathMatch: 'full' },
     { path: 'signin', component: SigninComponent },
     { path: 'rules', component: RulesComponent },
-    { path: 'games', canActivate: [AuthGuardService], component: GameRoomComponent },
+    { path: 'games', canActivate: [AuthGuardService], component: GameRoomComponent,  resolve: {games: GamesResolver}  },
     { path: 'game/:uuid', canActivate: [AuthGuardService], component: GameTableComponent,  resolve: {game: GameResolver}  },
     { path: '**', redirectTo: 'signin' },
   ];
@@ -20,7 +21,8 @@ const routes: Routes = [
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
     providers: [
-      GameResolver
+      GameResolver,
+      GamesResolver
     ]
   })
   export class AppRoutingModule { }

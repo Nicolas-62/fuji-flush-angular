@@ -24,8 +24,6 @@ export class RoomService {
   
   constructor(private http:HttpClient,
     private rxStompService: RxStompService) { 
-    console.log("roomService construct..")
- //   this.getGames();
   }
   subscribeToRoomWebSocket(player: User){
     this.roomSubscription =  this.rxStompService.watch('/send/games').subscribe((gamesReceived: Message) => {
@@ -33,16 +31,8 @@ export class RoomService {
       this.emitGames(); 
     });
   }
-  getGames(){
-    console.log("start request get all games");
-    this.http.get<Game[]>("/api/games")   
-    .subscribe(
-      games => {
-        this.games = games ? games : [];
-        console.log("games received from API (nb games) : "+ this.games.length);
-        this.emitGames();     
-      }
-    );
+  getGames(): Observable<Game[]> {
+    return this.http.get<Game[]>("/api/games");
   }
   emitGames(){
     this.gamesSubject.next(this.games);
@@ -61,7 +51,6 @@ export class RoomService {
   addGame(nbPlayer: number, user: User){
     const game = new Game(nbPlayer);
     game.author = user;
-    console.log("start request add game");
     this.http.post<any>("api/game/add", JSON.stringify(game))      
     .subscribe(
         game =>{
@@ -71,8 +60,7 @@ export class RoomService {
       });
   }
   addGameDemo(): Observable<Game>{
-    console.log("start request add game");
-    return this.http.get<any>("api/game/add/demo");    
+    return this.http.get<any>("api/game/demo/add");    
     
   }
 }

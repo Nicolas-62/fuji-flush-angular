@@ -34,10 +34,12 @@ export class OtherHandComponent implements OnInit, OnDestroy {
   }
   isTheCurrentPlayer(game: Game){
     // check if he's the current player
-    if(this.hand.player.email == game.currentPlayer.email){
-      this.currentPlayer = true;
-    }else{
-      this.currentPlayer = false;
+    if(!game.isFinished){
+      if(this.hand.player.email == game.currentPlayer.email){
+        this.currentPlayer = true;
+      }else{
+        this.currentPlayer = false;
+      }
     }
   }
   ngOnDestroy() {

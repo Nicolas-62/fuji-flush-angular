@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
@@ -18,7 +18,7 @@ export class SigninComponent implements OnInit {
 	errorMessage: string;
   players: User[];
   gameDemo: Game;
-  playerDemo = new User("bob@g.com", "Bob");
+  playerDemo = new User("klaatu@g.com", "Klaatu");
 
   constructor(private authService: AuthService,
   						private router: Router,
@@ -37,14 +37,12 @@ export class SigninComponent implements OnInit {
     });
   }
   launchDemo(){
-    this.spinner.show();
     this.authService.player = this.playerDemo;
+    this.authService.emitPlayer();
     this.roomService.addGameDemo().subscribe(
       game =>{
-        this.gameService.game = game;
-        console.log("gameDemo added received from server (id) : "+ game.id);
-        this.spinner.hide();
-        this.router.navigate(['/game/'+game.uuid]);
-    });
-  }
+        this.gameDemo = game;
+        this.router.navigate(['/game/'+this.gameDemo.uuid]);
+      });
+    }
 }

@@ -8,7 +8,7 @@ import { Hand } from '../models/Hand';
 import { AuthService } from '../services/auth.service';
 import { RxStompService } from '@stomp/ng2-stompjs';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game-room',
@@ -29,7 +29,8 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   // main du joueur dans une partie qu'il a déjà rejoint (voir si il a quitté la partie)
   aHand: Hand;
   
-  constructor(private roomService: RoomService, 
+  constructor(private route: ActivatedRoute,
+              private roomService: RoomService, 
               private authService: AuthService,
               private spinner: NgxSpinnerService,
               private router: Router) { }
@@ -39,15 +40,17 @@ export class GameRoomComponent implements OnInit, OnDestroy {
     this.spinner.show();
     this.player = this.authService.player;
     // connection à l'emétteur du service.   
+    // data récupérée durant la navigation
+    this.games = this.route.snapshot.data.games;
+    // ajout des parties au service.
+    this.roomService.games = this.games;
+    // connection au service
     this.gamesSubscription = this.roomService.gamesSubject.subscribe(
       (games: any[]) => {
         this.games = games;
-        console.log("from gameRoom, received from roomService (nb games): " +this.games.length);  
         this.orderGames();     
         this.spinner.hide(); 
     });
-    // récupération des parties par le service
-    this.roomService.getGames();
     // connection du service au websocket
     this.roomService.subscribeToRoomWebSocket(this.player);
   }
@@ -61,9 +64,9 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   // récuperer la main du joueur pour voir si il a quitté la partie
   getHandOfPlayer(game: Game): boolean{
     this.aHand=null;
-    for(const hand of game.hands){
-      if(hand.player.email === this.player.email){
-        this.aHand = hand;
+    for(let i=0; i<game.hands.length; i++){
+      if(game.hands[i].player.email === this.player.email){
+        this.aHand = game.hands[i];
         return true;
       }
     }
@@ -75,7 +78,6 @@ export class GameRoomComponent implements OnInit, OnDestroy {
     this.roomService.addGameWS(nbPlayer, this.player);
   }
   ngOnDestroy(){
-    console.log("component destroyed")
     this.gamesSubscription.unsubscribe();
     if(this.roomService.roomSubscription != null){
       this.roomService.roomSubscription.unsubscribe();
@@ -87,7 +89,7 @@ export class GameRoomComponent implements OnInit, OnDestroy {
     this.gamesToPlay = [];
     this.games.forEach(game => {
       let joined = false;
-    //if(!game.isFinished){
+    if(!game.isFinished){
         // checking if player already joined to the game
         for(let i = 0; i <game.hands.length; i++){
           if(game.hands[i].player.email == this.player.email){
@@ -102,7 +104,7 @@ export class GameRoomComponent implements OnInit, OnDestroy {
             this.gamesToJoin.push(game);
           }
         }
-      // }
+      }
     });
   }
 }

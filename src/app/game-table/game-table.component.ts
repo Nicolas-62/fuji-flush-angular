@@ -24,6 +24,7 @@ export class GameTableComponent implements OnInit, OnDestroy {
   // joueur courant
   player: User;
   playerHand: Hand = null;
+  currentHand: Hand;
   constructor(private route: ActivatedRoute, 
               private router: Router,
               private gameService: GameService,
@@ -34,35 +35,47 @@ export class GameTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.spinner.show();
+    // on récupère le joueur connecté
     this.player = this.authService.player;
     // data récupérée durant la navigation
-    console.log("game received from resolver (id) : " + this.route.snapshot.data.game.id)
     this.game = this.route.snapshot.data.game;
-    // on récupère la main du joueur
+    // on récupère la main du joueur dans la partie
     this.setHand();
     // on passe la partie au game service
     this.gameService.game = this.game;
-    // on ecoute l'éméteur du service
+    // connection au service
     this.gameSubscription = this.gameService.gameSubject.subscribe(
       game => {
-        console.log("from gameTable, received from gameService (id): " +  game.uuid);
         this.game = game;
+        // on récupère la main du joueur
         this.setHand();
         this.spinner.hide();
         if(game.isFinished){
+          // on défini les gagnants pour le template
           this.setWinners();
+          // on redirige au dashboard après affichage des gagants
           setTimeout(() =>{
+            this.authService.signOutUser();
             this.router.navigate(['/games']);
           }, 2000);
+        // si c'est une partie automatique on joue une carte du joueur courant
+        }else if(this.game.author.email == "klaatu@g.com"){
+          this.setCurrentHand();
+          setTimeout(() =>{
+            this.playCardDemo(this.currentHand.cards.length-1, this.currentHand);
+          }, 10);
         }
       }
     );
     // on fait émettre le service
-    this.gameService.emitGame();
-    // on se connecte au websocket du service
-    this.gameService.subscribeToGameWebSocket(this.player.email);
-    if(this.game.author.email = "bob@g.com"){
-      this.launchGameDemo();
+    //this.gameService.emitGame();
+    // on lance une partie automatique
+    if(!this.game.isFinished && this.game.author.email == "klaatu@g.com"){
+      this.setCurrentHand();
+      this.playCardDemo(this.currentHand.cards.length-1, this.currentHand);
+    }else{
+      // on se connecte au websocket du service
+      this.gameService.subscribeToGameWebSocket(this.player.email);     
     }
   }
   leave() {
@@ -76,6 +89,14 @@ export class GameTableComponent implements OnInit, OnDestroy {
           break;
         }
     }
+  }
+  setCurrentHand(): void {
+    for(let i=0; i< this.game.hands.length; i++){
+      if(this.game.hands[i].player.email === this.game.currentPlayer.email){
+        this.currentHand = this.game.hands[i];
+        break;
+      }
+  }
   }
   setWinners(): void {
     this.winners = [];
@@ -91,19 +112,7 @@ export class GameTableComponent implements OnInit, OnDestroy {
       this.gameService.gameWebSocket.unsubscribe();
     }
   }  
-  launchGameDemo(){
-    while(!this.game.isFinished){
-      for(let hand of this.game.hands){
-        if(hand.cards.length != 0){
-          setTimeout(() => {
-            this.playCardDemo(hand.cards.length-1, hand)
-          }, 1000)
-        }
-      }
-    }
-
-  }
   playCardDemo(cardIndex: number, hand: Hand){
-    this.gameService.playCard(this.game.uuid, this.game.hands.indexOf(hand), cardIndex);
+    this.gameService.playCardDemo(this.game.uuid, this.game.hands.indexOf(hand), cardIndex);
   }
 }

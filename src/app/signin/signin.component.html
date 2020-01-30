@@ -1,22 +1,25 @@
-<div class="register">
-  <form class="formulaire" (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <h1 class="titre">Login</h1>
-    <p>Choisissez un joueur</p>
-    <!-- <label class="form-titre" for="email">
-          Joueurs disponibles :
-    </label> -->
-    <select  class="form-saisie" id="email" name="email" ngModel required>
-      <option *ngFor="let player of players" value="{{ player.email }}" >{{ player.nickName }}</option>
-    </select>
-    <button class="registerbtn"
-              type="submit" 
-              [disabled]="f.invalid">Se connecter</button>
-  </form>
-</div>
-<div class="register">
-  <div class="formulaire">
-    <h1 class="titre">Demo</h1>
-    <p>Lancer la démonstration</p>
-    <button class="registerbtn"
-              (click)="launchDemo()">Go !</button>
+<div class="register-container">
+  <div class="register">
+    <form class="formulaire" (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <h2>Login</h2>
+      <h4>Choisissez un joueur</h4>
+      <!-- <label class="form-titre" for="email">
+            Joueurs disponibles :
+      </label> -->
+      <select  class="form-saisie" id="email" name="email" ngModel required>
+        <option *ngFor="let player of players" value="{{ player.email }}" >{{ player.nickName }}</option>
+      </select>
+      <button class="registerbtn"
+                type="submit" 
+                [disabled]="f.invalid">Se connecter</button>
+    </form>
+  </div>
+  <div><h2>OU</h2></div>
+  <div class="register">
+    <div class="formulaire">
+      <h2>Demo</h2>
+      <h4>Lancer la démonstration</h4>
+      <button class="registerbtn"
+                (click)="launchDemo()">Go !</button>
+    </div>
 </div>
