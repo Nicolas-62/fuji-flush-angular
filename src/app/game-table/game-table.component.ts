@@ -63,7 +63,7 @@ export class GameTableComponent implements OnInit, OnDestroy {
           this.setCurrentHand();
           setTimeout(() =>{
             this.playCardDemo(this.currentHand.cards.length-1, this.currentHand);
-          }, 10);
+          }, 1000);
         }
       }
     );
