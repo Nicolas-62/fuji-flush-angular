@@ -53,6 +53,7 @@ export class GameRoomComponent implements OnInit, OnDestroy {
     });
     // connection du service au websocket
     this.roomService.subscribeToRoomWebSocket(this.player);
+    this.roomService.emitGames();
   }
   // rejoindre une partie
   join(game: Game) {
