@@ -2,7 +2,7 @@ import { InjectableRxStompConfig } from '@stomp/ng2-stompjs';
 
 export const myRxStompConfig: InjectableRxStompConfig = {
   // Which server?
-  brokerURL: 'wss://shrouded-depths-77333.herokuapp.com/fuji-endpoint',
+  brokerURL: 'wss://fuji-flush-space.herokuapp.com/fuji-endpoint',
 
   // Headers
   // Typical keys: login, passcode, host
