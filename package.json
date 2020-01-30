@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --base-href /fuji-flush-space --proxy-config proxy.conf.json",
-    "build": "ng build --prod --base-href /fuji-flush-space",
+    "start": "ng serve --base-href /fuji-flush-online --proxy-config proxy.conf.json",
+    "build": "ng build --prod --base-href /fuji-flush-online",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
