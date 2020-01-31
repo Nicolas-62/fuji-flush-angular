@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Game } from '../models/Game';
-import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
+import { WebSocketSubject } from 'rxjs/webSocket';
 import { Subject, Observable, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RxStompService } from '@stomp/ng2-stompjs';

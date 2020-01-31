@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, of, Subscription, } from 'rxjs';
-import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
+import { WebSocketSubject } from 'rxjs/webSocket';
 import { Game } from '../models/Game';
 import { User } from '../models/User';
 import { RxStompService } from '@stomp/ng2-stompjs';
@@ -24,6 +24,7 @@ export class RoomService {
   
   constructor(private http:HttpClient,
     private rxStompService: RxStompService) { 
+    this.updateGames();
   }
   subscribeToRoomWebSocket(player: User){
     this.roomSubscription =  this.rxStompService.watch('/send/games').subscribe((gamesReceived: Message) => {
@@ -33,6 +34,12 @@ export class RoomService {
   }
   getGames(): Observable<Game[]> {
     return this.http.get<Game[]>("/api/games");
+  }
+  updateGames() {
+    this.http.get<Game[]>("/api/games").subscribe((games: Game[]) =>{
+      this.games = games;
+      this.emitGames();
+    });
   }
   emitGames(){
     this.gamesSubject.next(this.games);

@@ -12,7 +12,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'signin', pathMatch: 'full' },
     { path: 'signin', component: SigninComponent },
     { path: 'rules', component: RulesComponent },
-    { path: 'games', canActivate: [AuthGuardService], component: GameRoomComponent,  resolve: {games: GamesResolver}  },
+    { path: 'games', canActivate: [AuthGuardService], component: GameRoomComponent, resolve: {games: GamesResolver} },
     { path: 'game/:uuid', canActivate: [AuthGuardService], component: GameTableComponent,  resolve: {game: GameResolver}  },
     { path: '**', redirectTo: 'signin' },
   ];

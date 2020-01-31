@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { User } from 'src/app/models/User';
 import { Subscription } from 'rxjs';
 import { Game } from 'src/app/models/Game';
 import { Hand } from 'src/app/models/Hand';

@@ -1,14 +1,13 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GameService } from '../services/game.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Game } from '../models/Game';
 import { User } from '../models/User';
 import { Hand } from '../models/Hand';
 import { AuthService } from '../services/auth.service';
-import { Subscription, Observable } from 'rxjs';
-import { resolve } from 'url';
+import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { stringify } from 'querystring';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-game-table',
@@ -21,6 +20,7 @@ export class GameTableComponent implements OnInit, OnDestroy {
   gameSubscription: Subscription;
   game: Game;
   winners: Hand[];
+  demoEnd: boolean =false;
   // joueur courant
   player: User;
   playerHand: Hand = null;
@@ -29,7 +29,8 @@ export class GameTableComponent implements OnInit, OnDestroy {
               private router: Router,
               private gameService: GameService,
               private authService: AuthService,
-              private spinner: NgxSpinnerService) { 
+              private spinner: NgxSpinnerService,
+              private location: Location) { 
                 
               }
 
@@ -37,7 +38,7 @@ export class GameTableComponent implements OnInit, OnDestroy {
     this.spinner.show();
     // on récupère le joueur connecté
     this.player = this.authService.player;
-    // data récupérée durant la navigation
+    // data récupérée durant la navigation sinon erreur test 'undefined' sur les attribut dans le template.
     this.game = this.route.snapshot.data.game;
     // on récupère la main du joueur dans la partie
     this.setHand();
@@ -49,7 +50,6 @@ export class GameTableComponent implements OnInit, OnDestroy {
         this.game = game;
         // on récupère la main du joueur
         this.setHand();
-        this.spinner.hide();
         if(game.isFinished){
           // on défini les gagnants pour le template
           this.setWinners();
@@ -59,28 +59,34 @@ export class GameTableComponent implements OnInit, OnDestroy {
             this.router.navigate(['/games']);
           }, 2000);
         // si c'est une partie automatique on joue une carte du joueur courant
-        }else if(this.game.author.email == "klaatu@g.com"){
+        }else if(this.game.author.email === "klaatu@g.com" && !this.demoEnd){
           this.setCurrentHand();
           setTimeout(() =>{
             this.playCardDemo(this.currentHand.cards.length-1, this.currentHand);
           }, 1000);
         }
+        this.spinner.hide();          
       }
-    );
-    // on fait émettre le service
-    //this.gameService.emitGame();
-    // on lance une partie automatique
-    if(!this.game.isFinished && this.game.author.email == "klaatu@g.com"){
+    );    
+    // si on lance une partie automatique
+    if(!this.game.isFinished && this.game.author.email === "klaatu@g.com"){
       this.setCurrentHand();
       this.playCardDemo(this.currentHand.cards.length-1, this.currentHand);
     }else{
       // on se connecte au websocket du service
       this.gameService.subscribeToGameWebSocket(this.player.email);     
     }
+    // on fait emmettre le service
+    this.gameService.emitGame();
   }
   leave() {
-    this.gameService.leave(this.game.uuid, this.game.hands.indexOf(this.playerHand));  
-    this.router.navigate(['/games']);
+    if(this.player.email === "klaatu@g.com"){
+      this.demoEnd = true;
+      this.router.navigate(['/']);
+    }else{
+      this.gameService.leave(this.game.uuid, this.game.hands.indexOf(this.playerHand));  
+      this.router.navigate(['/games']);
+    }
   }  
   setHand(): void {
     for(let i=0; i< this.game.hands.length; i++){
@@ -106,13 +112,16 @@ export class GameTableComponent implements OnInit, OnDestroy {
       }
     }
   }
+  back(){
+    this.location.back();
+  }
+  playCardDemo(cardIndex: number, hand: Hand){
+    this.gameService.playCardDemo(this.game.uuid, this.game.hands.indexOf(hand), cardIndex);
+  }
   ngOnDestroy(){
     this.gameSubscription.unsubscribe();
     if(this.gameService.gameWebSocket != null){
       this.gameService.gameWebSocket.unsubscribe();
     }
   }  
-  playCardDemo(cardIndex: number, hand: Hand){
-    this.gameService.playCardDemo(this.game.uuid, this.game.hands.indexOf(hand), cardIndex);
-  }
 }

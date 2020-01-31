@@ -1,3 +1,4 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.3)"></ngx-spinner>
 <div id="container-game"  *ngIf="!game.isFinished; else gameEnd">
     <div id="table-game">
         <h3>Current Game </h3>
@@ -12,14 +13,13 @@
                     <app-player-hand [game]="game" [hand]="aHand"></app-player-hand>
                 </div>
                 <ng-template #otherHand><app-other-hand [game]="game" [hand]="aHand" [index]="i"></app-other-hand></ng-template>
-
             </div>
         </div>
     </div> 
     <div id="table-board">
         <app-game-history [game]="game"></app-game-history>
         <div class="area-button">
-            <button class="backbtn" routerLink="/games">Back</button>
+            <button class="backbtn" (click)="back()">Back</button>
             <button class="leavebtn" (click)="leave()">Leave</button>
         </div>
     </div>

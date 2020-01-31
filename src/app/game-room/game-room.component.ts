@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms' ;
 import { Subscription } from 'rxjs';
 import { RoomService } from '../services/room.service';
@@ -6,7 +6,6 @@ import { Game } from '../models/Game';
 import { User } from '../models/User';
 import { Hand } from '../models/Hand';
 import { AuthService } from '../services/auth.service';
-import { RxStompService } from '@stomp/ng2-stompjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -29,30 +28,29 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   // main du joueur dans une partie qu'il a déjà rejoint (voir si il a quitté la partie)
   aHand: Hand;
   
-  constructor(private route: ActivatedRoute,
-              private roomService: RoomService, 
+  constructor(private roomService: RoomService, 
               private authService: AuthService,
               private spinner: NgxSpinnerService,
-              private router: Router) { }
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-
     this.spinner.show();
     this.player = this.authService.player;
-    // connection à l'emétteur du service.   
     // data récupérée durant la navigation
-    this.games = this.route.snapshot.data.games;
+    this.roomService.games = this.route.snapshot.data.games;
     // ajout des parties au service.
-    this.roomService.games = this.games;
-    // connection au service
+    //this.roomService.games = this.games;
+    // connexion et ecoute du service
     this.gamesSubscription = this.roomService.gamesSubject.subscribe(
       (games: any[]) => {
         this.games = games;
-        this.orderGames();     
-        this.spinner.hide(); 
-    });
-    // connection du service au websocket
+        this.orderGames();
+          this.spinner.hide();          
+      });
+    // connexion du service au websocket
     this.roomService.subscribeToRoomWebSocket(this.player);
+    // Maj et emission des parties par le service
     this.roomService.emitGames();
   }
   // rejoindre une partie

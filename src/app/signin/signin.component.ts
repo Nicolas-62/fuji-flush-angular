@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { User } from '../models/User';
 import { Game } from '../models/Game';
-import { GameService } from '../services/game.service';
 import { RoomService } from '../services/room.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -13,7 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, AfterViewChecked {
 
 	errorMessage: string;
   players: User[];
@@ -22,12 +21,15 @@ export class SigninComponent implements OnInit {
 
   constructor(private authService: AuthService,
   						private router: Router,
-              private gameService: GameService,
               private roomService: RoomService,
-              private spinner: NgxSpinnerService) { }
+              private spinner: NgxSpinnerService ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.players = this.authService.availablePlayers;
+  }
+  ngAfterViewChecked(){
+    this.spinner.hide();          
   }
   onSubmit(form: NgForm){
 	const email = form.value['email'];
